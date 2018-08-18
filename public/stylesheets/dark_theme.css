@@ -1,0 +1,15 @@
+:root{
+  --main-colour:            #262626;    /* main body, usually white */
+  --primary-colour:         #1a1a1a;    /* navbar, sidemenu, etc. */
+  --secondary-colour:       #333333;    /* hover over navbar */
+  --tertiary-colour:        #000000;    /* dropdown menus */
+  --main-text-colour:       #20C20E;
+  --primary-text-colour:    #20C20E;
+  --secondary-text-colour:  #20C20E;
+  --tertiary-text-colour:   #20C20E;
+
+  --main-header-colour:     #333333;
+  --main-neutral-colour:    #20C20E;
+  --main-focus-colour:      #20C20E;
+  --main-btn-border-colour: #20C20E;
+}

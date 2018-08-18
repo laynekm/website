@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  head
+    script(src=scripts[0])
+    script(src=scripts[1])
+  body
+    script(src=scripts[2])
+    .main-header
+      h1 Films
+      p Uses the OMDb API which allows you to search for films using certain criteria (in this case the title) which then returns JSON strings including components such as the title, year, and IMDb ID. 
+    .main-body
+      .inputWithIcon
+        input#film(type='text', name='film', placeholder='Search for a film...')
+        i.fas.fa-search
+      br
+      button#submit(type='button', class='button', onclick='getFilms()') Search
+      #films

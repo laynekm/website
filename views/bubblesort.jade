@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  head
+    script(src=scripts[0])
+    script(src=scripts[1])
+  body
+    .main-header
+        h1 Bubble Sort
+        p A visualization of the classic sorting algorithm. Click/tap on the canvas to drop the elements, tidy them, then sort!
+    .main-body
+      canvas#canvas.canvas(width='640', height='480')
+      script(src=scripts[2])
+      br
+      button#clearButton(type='button', class='button', onclick='handleClearButton()', disabled='disabled') Clear
+      button#tidyButton(type='button', class='button', onclick='handleTidyButton()', disabled='disabled') Tidy
+      button#bubblesortButton(type='button', class='button', onclick='handleBubblesortButton()', disabled='disabled') Bubble Sort

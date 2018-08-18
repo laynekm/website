@@ -1,0 +1,81 @@
+  <div class="page-header">
+    <h2>Dashboard</h2>
+  </div>
+
+  <div class="jumbotron">
+    <p>
+      This database is designed using MySQL. The front-end UI uses the Bootstrap framework.
+      Data is validated and captured by the client, then sent to the server where it is processed into SQL queries.
+      These queries are then sent to the database, the results of which are returned to the server, forwarded to the client, and formatted.
+    </p>
+    <p>
+      There are currently two kinds of records: animals and employees.
+    </p>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card" style="border:none;">
+          <div class="card-body" style="background-color: #e9ecef;">
+            <h6 class="card-title">Animal records contain:</h6>
+            <p class="card-text">
+              <ul>
+                <li> Unique ID (primary key) </li>
+                <li> Name </li>
+                <li> Species </li>
+                <li> Type (ie. mammal, reptile) </li>
+                <li> Exhibit (ie. arctic, savannah) </li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card" style="border:none;">
+          <div class="card-body" style="background-color: #e9ecef;">
+            <h6 class="card-title">Employee records contain:</h6>
+            <p class="card-text">
+              <ul>
+                <li> Unique ID (primary key) </li>
+                <li> Name </li>
+                <li> Type (ie. handler, maintenance) </li>
+                <li> Subtype (ie. handler exhibit, maintenance department) </li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Here you can...</h4>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Query Records</h5>
+          <p class="card-text">Query records, or view all records.</p>
+          <a href="/dbms/query-animal" class="btn btn-primary">Animals</a>
+          <a href="/dbms/query-employee" class="btn btn-primary">Employees</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Add Records</h5>
+          <p class="card-text">Add new records to the database.</p>
+          <a href="/dbms/add-animal" class="btn btn-primary">Animals</a>
+          <a href="/dbms/add-employee" class="btn btn-primary">Employees</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Remove Records</h5>
+          <p class="card-text">Remove records from the database.</p>
+          <a href="/dbms/remove-animal" class="btn btn-primary">Animals</a>
+          <a href="/dbms/remove-employee" class="btn btn-primary">Employees</a>
+        </div>
+      </div>
+    </div>
+  </div>

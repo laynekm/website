@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  head
+    script(src=scripts[0])
+    script(src=scripts[1])
+  body
+    .main-header
+      p(style='font-size:40px; font-weight: bold;') ¯\_(ツ)_/¯
+      h1= message
+      h2= error.status
+      pre #{error.stack}
+    .main-body

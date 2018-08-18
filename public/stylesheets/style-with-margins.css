@@ -1,0 +1,243 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: var(--primary-colour);
+}
+
+html, body
+{
+    height: calc(100% - 90px);
+}
+
+.navbar{
+  background-color: var(--tertiary-colour);
+  top: 0;
+  left: 0;
+  height:75px;
+  width:100%;
+  position:fixed;
+}
+
+.navbar a{
+  color: var(--primary-text-colour);
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  line-height: 75px;
+}
+
+.sidenav{
+  background-color: var(--primary-colour);
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  overflow-x: hidden;
+}
+
+.sidenav a, .dropdown-btn{
+  color: var(--primary-text-colour);
+  padding-left: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  height: 50px;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.sidenav a{
+  line-height: 50px;
+}
+
+.sidenav a:hover, .dropdown-btn:hover {
+  color: var(--secondary-text-colour);
+  background-color: var(--secondary-colour);
+}
+
+.active {
+  color: var(--secondary-text-colour);
+  background-color: var(--secondary-colour);
+}
+
+.dropdown-container {
+  display: none;
+  background-color: var(--tertiary-colour);
+  color: var(--tertiary-text-colour);
+  padding-left: 8px;
+}
+
+.colour-container-button {
+  display: inline-block;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  height: 25px;
+  width: 25px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.colour-container-button:focus{
+  outline: none;
+}
+
+/* main with right and bottom margins */
+.main{
+  background-color: var(--main-colour);
+  color: var(--main-text-colour);
+  min-height: 100%;
+  margin-top: 75px;
+  margin-left: 193px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  padding: 20px;
+  padding-right: 30px;
+  position: relative;
+}
+
+.main-text{
+  display: inline-block;
+  width: 100%;
+}
+
+.canvas{
+  border: 5px solid var(--primary-colour);
+  border-radius: 10px;
+  max-width: 1080px;
+  width: 100%;
+}
+
+.canvas-container{
+  text-align: center;
+}
+
+.fa-caret-down {
+  color: var(--primary-text-colour);
+  float: right;
+  padding-right: 8px;
+  vertical-align: middle;
+}
+
+.fas{
+  color: var(--primary-text-colour);
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+.fas.fa-home{
+  color: var(--primary-text-colour);
+  font-size: 40px;
+  padding-left: 15px;
+  padding-right: 10px;
+  line-height: 75px;
+}
+
+.button {
+  background-color: var(--primary-colour);
+  color: var(--primary-text-colour);
+  border: none;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px 4px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.button:focus{
+  outline: none;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+input[type=text] {
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 8px;
+  padding-left:40px;
+  transition: .3s;
+  background-color: var(--main-colour);
+}
+
+input[type=text]:focus{
+  border-color: var(--primary-colour);
+  outline: none;
+}
+
+.inputWithIcon{
+  position:relative;
+}
+
+.inputWithIcon i{
+  position:absolute;
+  font-size: 1.5em;
+  left:0;
+  padding-left: 12px;
+  padding-top: 14px;
+  color:#aaa;
+  transition:.3s;
+}
+
+.inputWithIcon input[type=text]:focus + i{
+  color: var(--primary-colour);
+}
+
+.footer{
+
+}
+
+/* recipe */
+.recipe {
+    margin: 10px;
+    height: 150px;
+    width: 100%;
+}
+.recipe img {
+    width: 150px;
+    height: 150px;
+    float: left;
+    padding: 10px;
+    padding-bottom: 0px;
+    cursor: pointer;
+}
+.recipeCaption{
+    display: inline;
+    font-size: 20px;
+}
+
+/* film */
+.film {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    padding-top: 20px;
+    width: 230px;
+}
+.film img {
+    width: 225px;
+    height: 333px;
+    cursor: pointer;
+}
+.filmCaption {
+    display: block;
+    font-size: 20px;
+    padding-top: 5px;
+}

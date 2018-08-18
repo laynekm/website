@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  head
+    script(src=scripts[0])
+    script(src=scripts[1])
+  body
+    script(src=scripts[2])
+    .main-header
+      h1 Recipes
+      p Uses the Food2Fork API to search numerous blogs and recipe sites, returning recipes which match the ingredients that were inputted. Ingredients must be separated by a comma.
+      p Originally created for COMP 2406.
+    .main-body  
+      .inputWithIcon
+        input#ingredient(type='text', name='ingredient', placeholder='Search for ingredients...')
+        i.fas.fa-search
+      br
+      button#submit(type='button', class='button', onclick='getRecipes()') Search
+      #recipes

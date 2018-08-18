@@ -1,0 +1,1 @@
+{"easy":{"names":["John","Jacob","Jingle","Heimer","Schmidt"],"scores":[0,0,0,0,0]},"medium":{"names":["John","Jacob","Jingle","Heimer","Schmidt"],"scores":[0,0,0,0,0]},"hard":{"names":["John","Jacob","Jingle","Heimer","Schmidt"],"scores":[0,0,0,0,0]}}

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  head
+    script(src=scripts[0])
+    script(src=scripts[1])
+  body
+    .main-header
+      h1 Fridge Magnets
+      p Uses the Konva.js HTML5 2D Canvas Library for the drawing and movement of shapes, and the socket.io module to record changes on the server and emit these changes to all participating browsers.
+    .main-body
+      #container.fridge-container(style="background-image: url('./images/fridge.png');")
+      script(src=scripts[2])
+      script(src=scripts[3])
+      script(src=scripts[4])

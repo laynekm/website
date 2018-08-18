@@ -1,0 +1,154 @@
+  <div class="page-header">
+    <h2>Query Employee</h2>
+  </div>
+
+  <div class="jumbotron">
+    <p>Query employee records using one or more of the provided fields, or view all employee records.</p>
+  </div>
+
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="id">Employee ID</label>
+        <input type="text" class="form-control" id="employee_id" placeholder="Employee ID">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="employee_name">Name</label>
+        <input type="text" class="form-control" id="employee_name" placeholder="Name">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="employee_type">Type</label>
+        <select id="employee_type" class="form-control">
+          <option selected>Choose...</option>
+          <option value="Handler">Handler</option>
+          <option value="Maintenance">Maintenance</option>
+          <option value="Administrator">Administrator</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6" style="display: none;" id="employee_handler_exhibit_div">
+        <label for="employee_handler_exhibit">Handler Exhibit</label>
+        <select id="employee_handler_exhibit" class="form-control">
+          <option selected>Choose...</option>
+          <option>Arctic</option>
+          <option>Temperate</option>
+          <option>Savannah</option>
+          <option>Marine</option>
+          <option>Jurassic</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6" style="display: none;" id="employee_maintenance_job_div">
+        <label for="employee_maintenance_job">Maintenance Job</label>
+        <select id="employee_maintenance_job" class="form-control">
+          <option selected>Choose...</option>
+          <option>Cleaning</option>
+          <option>Plumbing</option>
+          <option>Electric</option>
+          <option>Shippinig</option>
+          <option>Receiving</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6" style="display: none;"  id="employee_admin_dept_div">
+        <label for="employee_admin_dept">Administrator Department</label>
+        <select id="employee_admin_dept" class="form-control">
+          <option selected>Choose...</option>
+          <option>Office Administration</option>
+          <option>Field Administration</option>
+          <option>Public Relations</option>
+          <option>Human Resources</option>
+          <option>IT</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button type="button" id="query_employee_btn" class="btn btn-primary" onclick="queryEmployee()">Submit Query</button>
+    <button type="button" id="getall_employees_btn" class="btn btn-primary" onclick="getAllEmployees()">View All Employees</button>
+  </form>
+
+  <br>
+  <div class = "container">
+    <h4 id="table-header" style="display:none;"></h4>
+    <table id = "table" style="display: none;">
+      <thead>
+        <tr>
+          <th data-field="id"> ID </th>
+          <th data-field="name"> Name </th>
+          <th data-field="type"> Type </th>
+          <th data-field="subtype"> Subtype </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <script>
+    $(function(){
+      $('#employee_type').change(function(){
+        let value = $(this).val();
+        if(value == 'Handler'){
+          $('#employee_handler_exhibit_div').show();
+          $('#employee_maintenance_job_div').hide();
+          $('#employee_maintenance_job').val('Choose...');
+          $('#employee_admin_dept_div').hide();
+          $('#employee_admin_dept').val('Choose...');
+        }
+        else if(value == 'Maintenance'){
+          $('#employee_handler_exhibit_div').hide();
+          $('#employee_handler_exhibit').val('Choose...');
+          $('#employee_maintenance_job_div').show();
+          $('#employee_admin_dept_div').hide();
+          $('#employee_admin_dept').val('Choose...');
+
+        }
+        else if(value == 'Administrator'){
+          $('#employee_handler_exhibit_div').hide();
+          $('#employee_handler_exhibit').val('Choose...');
+          $('#employee_maintenance_job_div').hide();
+          $('#employee_maintenance_job').val('Choose...');
+          $('#employee_admin_dept_div').show();
+        }
+        else{
+          $('#employee_handler_exhibit_div').hide();
+          $('#employee_handler_exhibit').val('Choose...');
+          $('#employee_maintenance_job_div').hide();
+          $('#employee_maintenance_job').val('Choose...');
+          $('#employee_admin_dept_div').hide();
+          $('#employee_admin_dept').val('Choose...');
+        }
+
+        if($('#employee_id').val() != '' || $('#employee_name').val() != '' || $('#employee_type').val() != 'Choose...' ||
+           $('#employee_handler_exhibit').val() != 'Choose...' || $('#employee_maintenance_job').val() != 'Choose...' || $('#employee_admin_dept').val() != 'Choose...'){
+            $('#query_employee_btn').removeAttr('disabled');
+         }
+         else{
+           $('#query_employee_btn').attr('disabled', 'true');
+         }
+      });
+    });
+
+    //enable button when at least one of the fields has a value
+    $('#query_employee_btn').attr('disabled', 'true');
+
+    $('#employee_id, #employee_name').bind('keyup', function(){
+      if($('#employee_id').val() != '' || $('#employee_name').val() != '' || $('#employee_type').val() != 'Choose...' ||
+         $('#employee_handler_exhibit').val() != 'Choose...' || $('#employee_maintenance_job').val() != 'Choose...' || $('#employee_admin_dept').val() != 'Choose...'){
+          $('#query_employee_btn').removeAttr('disabled');
+       }
+       else{
+         $('#query_employee_btn').attr('disabled', 'true');
+       }
+     });
+
+     $('#employee_handler_exhibit, #employee_maintenance_job, #employee_admin_dept').bind('change', function(){
+       if($('#employee_id').val() != '' || $('#employee_name').val() != '' || $('#employee_type').val() != 'Choose...' ||
+          $('#employee_handler_exhibit').val() != 'Choose...' || $('#employee_maintenance_job').val() != 'Choose...' || $('#employee_admin_dept').val() != 'Choose...'){
+           $('#query_employee_btn').removeAttr('disabled');
+        }
+        else{
+          $('#query_employee_btn').attr('disabled', 'true');
+        }
+      });
+  </script>

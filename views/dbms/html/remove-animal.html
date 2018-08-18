@@ -1,0 +1,52 @@
+  <div class="page-header">
+    <h2>Remove Animal</h2>
+  </div>
+
+  <div class="jumbotron">
+    <p>Remove animals based on ID or name.</p>
+  </div>
+
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="animal_id">Animal ID</label>
+        <input type="text" class="form-control" id="animal_id" placeholder="Animal ID">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="animal_name">Name</label>
+        <input type="text" class="form-control" id="animal_name" placeholder="Name">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <button type="button" id="remove_animal_by_id_btn" class="btn btn-primary" onclick="removeAnimalByID()">Submit ID</button>
+      </div>
+      <div class="form-group col-md-6">
+        <button type="button" id="remove_animal_by_name_btn" class="btn btn-primary" onclick="removeAnimalByName()">Submit Name</button>
+      </div>
+    </div>
+  </form>
+
+<script>
+  $('#remove_animal_by_id_btn').attr('disabled', 'true');
+  $('#remove_animal_by_name_btn').attr('disabled', 'true');
+
+  $('#animal_id').bind('keyup', function(){
+    if($('#animal_id').val() != ''){
+        $('#remove_animal_by_id_btn').removeAttr('disabled');
+     }
+     else{
+       $('#remove_animal_by_id_btn').attr('disabled', 'true');
+     }
+   });
+
+   $('#animal_name').bind('keyup', function(){
+     if($('#animal_name').val() != ''){
+         $('#remove_animal_by_name_btn').removeAttr('disabled');
+      }
+      else{
+        $('#remove_animal_by_name_btn').attr('disabled', 'true');
+      }
+    });
+</script>

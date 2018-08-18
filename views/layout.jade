@@ -1,0 +1,168 @@
+doctype html
+html
+  head
+    title= title
+    meta(name='viewport', content='width=device-width')
+    link(id='colourStyle', rel='stylesheet', href='/stylesheets/blue_theme.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous")
+  body
+    .navbar
+      a(href='/')
+        i.fas.fa-home
+        | Homepage
+      .navbar-links
+        a(href='https://github.com/laynekm')
+          i.fab.fa-git-square
+          |Github
+        a(href='#')
+          i.fab.fa-linkedin
+          |LinkedIn
+        a(href='/contact') Contact
+        a(href='/privacy') Privacy Policy  
+    .sidenav-container
+    .sidenav
+      button.dropdown-btn
+        i.fab.fa-js-square
+        |  Frameworks
+        i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/dbms') Bootstrap (DBMS)
+        a(href='/') React (in progress)
+      button.dropdown-btn
+        i.fas.fa-gamepad
+        |  Games
+        i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/snake') Snake
+      button.dropdown-btn
+        i.fas.fa-chart-pie
+        i.fa.fa-caret-down
+        |  Visualizations
+      .dropdown-container
+        a(href='/bubblesort') Bubble Sort
+        a(href='/insertionsort') Insertion Sort
+        a(href='/selectionsort') Selection Sort
+      button.dropdown-btn
+        i.fas.fa-cloud
+        |  API Examples
+        i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/recipes') Recipes
+        a(href='/films') Films
+      button.dropdown-btn
+        i.fas.fa-server
+        |  Sockets
+        i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/magnets') Fridge Magnets
+      button.dropdown-btn
+        i.fas.fa-palette
+        | Change Theme
+        i.fa.fa-caret-down
+      .dropdown-container
+        button#redButton(type='button', class='colour-container-button', onclick="changeColour('red')", style='background-color:#D50000;')
+        button#orangeButton(type='button', class='colour-container-button', onclick="changeColour('orange')", style='background-color:#EF6C00;')
+        button#yellowButton(type='button', class='colour-container-button', onclick="changeColour('yellow')", style='background-color:#FFEA00;')
+        button#greenButton(type='button', class='colour-container-button', onclick="changeColour('green')", style='background-color:#2E7D32;')
+        button#blueButton(type='button', class='colour-container-button', onclick="changeColour('blue')", style='background-color:#1565C0;')
+        button#indigoButton(type='button', class='colour-container-button', onclick="changeColour('indigo')", style='background-color:#5C6BC0;')
+        button#violetButton(type='button', class='colour-container-button', onclick="changeColour('violet')", style='background-color:#AB47BC;')
+        button#darkButton(type='button', class='colour-container-button', onclick="changeColour('dark')", style='background-color:#1a1a1a;')
+        p(style='font-size: 10px; padding: 5px; padding-bottom: 15px;') *Selecting a theme stores a cookie in your browser to remember your choice.
+    
+    .mobile-navbar
+      button.mobile-navbar-btn(onclick="toggleSidenav()")
+        i.fas.fa-bars
+      a(href='/')
+        i.fas.fa-home
+    .mobile-sidenav-container
+    .mobile-sidenav
+      button.dropdown-btn
+        i.fab.fa-js-square
+        |  Frameworks
+        //i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/dbms') Bootstrap (DBMS)
+        a(href='/') React (Travel App)
+      button.dropdown-btn
+        i.fas.fa-gamepad
+        |  Games
+        //i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/snake') Snake
+      button.dropdown-btn
+        i.fas.fa-chart-pie
+        |  Visualizations
+        //i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/bubblesort') Bubble Sort
+        a(href='/insertionsort') Insertion Sort
+        a(href='/selectionsort') Selection Sort
+      button.dropdown-btn
+        i.fas.fa-cloud
+        |  API Examples
+        //i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/recipes') Recipes
+        a(href='/films') Films
+      button.dropdown-btn
+        i.fas.fa-server
+        |  Sockets
+        //i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/magnets') Fridge Magnets
+      button.dropdown-btn
+        i.fas.fa-palette
+        | Change Theme
+        //i.fa.fa-caret-down
+      .dropdown-container
+        button#redButton(type='button', class='colour-container-button', onclick="changeColour('red')", style='background-color:#D50000;')
+        button#orangeButton(type='button', class='colour-container-button', onclick="changeColour('orange')", style='background-color:#EF6C00;')
+        button#yellowButton(type='button', class='colour-container-button', onclick="changeColour('yellow')", style='background-color:#FFEA00;')
+        button#greenButton(type='button', class='colour-container-button', onclick="changeColour('green')", style='background-color:#2E7D32;')
+        button#blueButton(type='button', class='colour-container-button', onclick="changeColour('blue')", style='background-color:#1565C0;')
+        button#indigoButton(type='button', class='colour-container-button', onclick="changeColour('indigo')", style='background-color:#5C6BC0;')
+        button#violetButton(type='button', class='colour-container-button', onclick="changeColour('violet')", style='background-color:#AB47BC;')
+        button#darkButton(type='button', class='colour-container-button', onclick="changeColour('dark')", style='background-color:#1a1a1a;')
+        p(style='font-size: 10px; padding: 5px; padding-bottom: 15px;') *Selecting a theme stores a cookie in your browser to remember your choice.
+      br
+      hr
+      br
+      a(href='https://github.com/laynekm')
+        i.fab.fa-git-square
+        | Github
+      a(href='#')
+        i.fab.fa-linkedin
+        | LinkedIn
+      a(href='/contact') Contact
+      a(href='/privacy') Privacy Policy
+          
+      script.
+        let dropdown = document.getElementsByClassName("dropdown-btn");
+        for(let i = 0; i < dropdown.length; i++){
+          dropdown[i].addEventListener("click", function(){
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if(dropdownContent.style.display == "block"){
+              $(dropdownContent).slideUp(200);
+            }
+            else{
+              $(dropdownContent).slideDown(200);
+            }
+          });
+        }
+        
+        function toggleSidenav(){
+          if($(".mobile-sidenav").css("width") == "0px"){
+            $(".mobile-sidenav-container").css("width", "200px");
+            $(".mobile-sidenav").css("width", "200px");
+          }
+          else{
+            $(".mobile-sidenav-container").css("width", "0px");
+            $(".mobile-sidenav").css("width", "0px");
+          }
+        }
+  
+    #main.main
+      block content
