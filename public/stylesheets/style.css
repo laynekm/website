@@ -178,12 +178,18 @@ ul{
   border: 2px solid;
   border-color: var(--primary-colour);
   border-radius: 5px;
-  width: 92%;
+  width: calc(100% - 50px);
   margin: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   vertical-align: top;
   text-align: left;
   min-height: 250px;
+}
+
+.half-cards-container{
+  width: calc(100% - 50px);
+  text-align: left;
+  margin: 15px;
 }
 
 .half-card{
@@ -191,8 +197,7 @@ ul{
   border: 2px solid;
   border-color: var(--primary-colour);
   border-radius: 5px;
-  width: 45%;
-  margin: 5px;
+  width: 48%;
   vertical-align: top;
   text-align: left;
   min-height: 250px;
@@ -345,6 +350,7 @@ input[type=text]:focus{
     height:75px;
     width:100%;
     position: absolute;
+    z-index: 3;
   }
 
   .mobile-navbar-btn{
@@ -380,7 +386,9 @@ input[type=text]:focus{
     float: left;
     width: 0px;
     height: 100%;
+    top: 0;
     position: fixed;
+    z-index: 1;
     transition: width 0.5s;
   }
 
@@ -391,7 +399,7 @@ input[type=text]:focus{
     transition: width 0.5s;
     background-color: var(--primary-colour);
     float: left;
-    z-index: 1;
+    z-index: 2;
     overflow-x: hidden;
     overflow-y: hidden;
   }

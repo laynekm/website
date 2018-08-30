@@ -281,6 +281,12 @@ let left = 37;
 //handle snake movement depending on which key is pressed
 //ensure snake cannot move directly backwards
 function handleKeyDown(key){
+
+  //prevent browser page scrolling
+  if(key.which == up || key.which == down || key.which == left || key.which == right){
+    key.view.event.preventDefault();
+  }
+
   let head = snake.length-1;
   if(key.which == up && snake[head].dy != 10){
     dy = -10;

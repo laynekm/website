@@ -5,9 +5,9 @@ block content
     script(src=scripts[0])
     script(src=scripts[1])
   body
-    .main-header(style='min-height: 290px;')
+    .main-header(style='min-height: 370px;')
       h1 Welcome / Bienvenue
-      img(src="/images/me.jpg" alt="me" style="float:left; border-radius: 50%; margin-right:15px; margin-bottom: 15px;")
+      img(src="/images/me_closeup.jpg" alt="me" style="float:left; height:250px; width:250px; border-radius: 50%; margin-left: 10px; margin-right:20px; margin-bottom: 20px;")
       p Hi, I'm Layne.
       p I'm a third-year Carleton student enrolled in the Honour's Computer Science program in the Software Engineering stream. I'll put some more information here.
       p I'm also minoring in history because history is cool.
@@ -28,23 +28,16 @@ block content
             li Cookies (see 'Change Theme')
             li A MySQL database (see the Bootstrap DBMS)
             li Mobile-friendly formatting and pretty colours
-      .half-card
-        .card-header
-            i.far.fa-lightbulb
-            | Upcoming features:
-        .card-body
-          ul 
-            li React - Travel app (travel, weather APIs)
+          p Upcoming features:
+            li React - travel ap (single-page app with travel, weather APIs)
             li Who knows what else the future may hold
-      .half-card
+      .full-card
         .card-header
-            i.fas.fa-bug
-            | Known issues:
+          i.fas.fa-bug
+          | Known issues:
         .card-body
           ul
-            li Canvas input location does not scale with browser resize (much better now but still not exact)
             li Sidenav text slightly misaligned
-            li Mobile sidenav down-arrows wrap to next line when sliding (removed for now)
-            li Sidenav container fixed so still appears if scroll right
+            li Canvas input location does not scale with browser resize (much better now but still not exact)            li Mobile sidenav down-arrows wrap to next line when sliding (removed for now)
+            li Sidenav container fixed so still appears if scroll right (though this should never actually happen)
             li LinkedIn link does not work as I don't have one yet
-            li Still need someone to take a professional-looking photo of me
