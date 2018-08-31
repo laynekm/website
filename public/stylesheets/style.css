@@ -22,6 +22,7 @@ ul{
   height:75px;
   width:100%;
   position: absolute;
+  z-index: 3;
 }
 
 .navbar a{
@@ -67,6 +68,8 @@ ul{
   width: 200px;
   height: 100%;
   position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 .sidenav{
@@ -74,7 +77,7 @@ ul{
   float: left;
   width: 200px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   overflow-x: hidden;
 }
 
@@ -335,6 +338,15 @@ input[type=text]:focus{
     padding-top: 5px;
 }
 
+.index-header img{
+  float: left;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
 /* MOBILE FORMATTING OF NAVBAR / SIDENAV */
 @media screen and (max-width: 650px){
   .sidenav-container {display: none; }
@@ -439,8 +451,16 @@ input[type=text]:focus{
   }
 }
 
-@media screen and (max-width: 500px){
-  .half-card{
-    width: 92%;
+@media screen and (max-width: 450px){
+  .index-header img{
+    float: none;
+    margin: 0px;
+
+  }
+
+  .index-header{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
   }
 }
