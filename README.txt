@@ -1,3 +1,18 @@
 A personal website I'm working on using the Express framework for Node. Hosted on AWS.
 
-Link: http://laynekm.com/
+Homepage:
+http://laynekm.com
+
+DBMS: 
+http://laynekm.com/dbms
+
+Snake: 
+http://laynekm.com/snake
+
+Algorithms:
+http://laynekm.com/bubblesort
+http://laynekm.com/insertionsort
+http://laynekm.com/selectionsort
+
+Sockets:
+http://laynekm.com/magnets
