@@ -14,5 +14,9 @@ http://laynekm.com/bubblesort
 http://laynekm.com/insertionsort
 http://laynekm.com/selectionsort
 
+APIs:
+http://laynekm.com/recipes
+http://laynekm.com/films
+
 Sockets:
 http://laynekm.com/magnets
