@@ -197,16 +197,6 @@ io.on('connection', function(socket){
 //***************************
 //connect to database
 let connection = mysql.createConnection({
-
-  //connecting locally
-  /*
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'zoodb'
-  */
-
-  //connecting remotely on server
   host:     process.env.RDS_HOSTNAME,
   user:     process.env.RDS_USERNAME,
   password: process.env.RDS_PASSWORD,
