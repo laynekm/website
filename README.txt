@@ -1,7 +1,7 @@
 A personal website I'm working on using the Express framework for Node. Hosted on AWS.
 
 Homepage:
-http://laynekm.com/
+http://laynekm.com
 
 DBMS: 
 http://laynekm.com/dbms
