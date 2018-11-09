@@ -1,7 +1,5 @@
 #ignore
 /node_modules
-.gitignore
-package-lock.json
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
