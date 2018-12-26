@@ -38,6 +38,7 @@ app.use('/favicon.ico', express.static('images/favicon.ico'));
 // Main website routing
 var indexRouter = require('./routes/index');
 var snakeRouter = require('./routes/snake');
+var tetrisRouter = require('./routes/tetris');
 var bubblesortRouter = require('./routes/bubblesort');
 var insertionsortRouter = require('./routes/insertionsort');
 var selectionsortRouter = require('./routes/selectionsort');
@@ -48,6 +49,7 @@ var contactRouter = require('./routes/contact')
 var privacyRouter = require('./routes/privacy');
 app.use('/', indexRouter);
 app.use('/snake', snakeRouter);
+app.use('/tetris', tetrisRouter);
 app.use('/bubblesort', bubblesortRouter);
 app.use('/insertionsort', insertionsortRouter);
 app.use('/selectionsort', selectionsortRouter);
