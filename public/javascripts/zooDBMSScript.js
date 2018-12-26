@@ -31,7 +31,7 @@ function addEmployee(){
   let employee_name = document.getElementById('employee_name').value;
   let employee_type = document.getElementById('employee_type').value;
 
-  //only use the subtype that has been selected (ie. the value is not the defautl 'Choose...')
+  // Only use the subtype that has been selected (ie. the value is not the defautl 'Choose...')
   let employee_subtype;
   if(document.getElementById('employee_handler_exhibit').value != 'Choose...'){
     employee_subtype = document.getElementById('employee_handler_exhibit').value;
@@ -60,7 +60,7 @@ function queryAnimal(){
   let animal_name = document.getElementById('animal_name').value;
   let animal_species = document.getElementById('animal_species').value;
 
-  //only use the type/exhibit that have been selected (ie. not the default 'Choose...')
+  // Only use the type/exhibit that have been selected (ie. not the default 'Choose...')
   let animal_type = '';
   let animal_exhibit = '';
   if(document.getElementById('animal_type').value != 'Choose...'){
@@ -93,7 +93,7 @@ function queryEmployee(){
   let employee_id = document.getElementById('employee_id').value;
   let employee_name = document.getElementById('employee_name').value;
 
-  //only use the type/subtype that have been selected (ie. not the defautl 'Choose...')
+  // Only use the type/subtype that have been selected (ie. not the defautl 'Choose...')
   let employee_type = '';
   let employee_subtype = '';
   if(document.getElementById('employee_type').value != 'Choose...'){
@@ -128,7 +128,7 @@ function queryEmployee(){
 
 }
 
-//get all animals from database, display using default bootstrap table
+// Get all animals from database, display using default bootstrap table
 function getAllAnimals(){
   $.get('/getAllAnimals', function(data, status){
     $('#table').bootstrapTable('destroy');
@@ -141,7 +141,7 @@ function getAllAnimals(){
   });
 }
 
-//get all employees from database, display using default bootstrap table
+// Get all employees from database, display using default bootstrap table
 function getAllEmployees(){
   $.get('/getAllEmployees', function(data, status){
     $('#table').bootstrapTable('destroy');
@@ -154,7 +154,7 @@ function getAllEmployees(){
   });
 }
 
-//send animal ID to server to be removed
+// Send animal ID to server to be removed
 function removeAnimalByID(){
   let animal_id = document.getElementById('animal_id').value;
   let animalObj = {id: animal_id};
@@ -165,7 +165,7 @@ function removeAnimalByID(){
   });
 }
 
-//send animal name to server to be removed
+// Send animal name to server to be removed
 function removeAnimalByName(){
   let animal_name = document.getElementById('animal_name').value;
   let animalObj = {name: animal_name};
@@ -176,7 +176,7 @@ function removeAnimalByName(){
   });
 }
 
-//send employee ID to server to be removed
+// Send employee ID to server to be removed
 function removeEmployeeByID(){
   let employee_id = document.getElementById('employee_id').value;
   let employeeObj = {id: employee_id};
@@ -187,7 +187,7 @@ function removeEmployeeByID(){
   });
 }
 
-//send employee name to server to be removed
+// Send employee name to server to be removed
 function removeEmployeeByName(){
   let employee_name = document.getElementById('employee_name').value;
   let employeeObj = {name: employee_name};

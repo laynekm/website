@@ -10,20 +10,19 @@ stage.add(layer)
 let magnets = [];
 let magnetCoords = [];
 
-//receive initial magnet coordinates
+// Receive initial magnet coordinates
 let initialized = 'false';
 socket.emit('initialMagnetData');
 socket.on('initialMagnetData', function(data){
   magnetCoords = data;
   if(initialized == 'false'){
+    initialized = 'true';
     init();
   }
 });
 
-//draw shapes and add them to the magnets array
+// Draw shapes and add them to the magnets array
 let init = function(){
-  initialized = 'true';
-
   let square = new Konva.Rect({
     x: magnetCoords[0].x,
     y: magnetCoords[0].y,
@@ -125,7 +124,7 @@ let init = function(){
     }
   });
 
-  //prevents duplicates
+  // Prevents duplicates
   magnets.push(square);
   magnets.push(circle);
   magnets.push(text);
