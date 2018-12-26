@@ -9,8 +9,7 @@ $(document).ready(function() {
   timer = setInterval(handleTimer, 10);
 });
 
-//when user clicks canvas, generate new ball in the position they selected
-//and add ball to ball array
+// On click, generate new ball at that position and add to ball array
 function handleClick(e){
   $("#clearButton").attr("disabled", false);
   $("#tidyButton").attr("disabled", false);
@@ -29,8 +28,7 @@ function handleClick(e){
   let moveTo = [];
   let clearFrom = [];
 
-  //accounting for when canvas is resized with css (ie. window smaller)
-  //not perfect but much better
+  // Accounts for when canvas is resized via css (ie. window smaller)
   let stringWidth = $('.main-body').css('width');
   let w = stringWidth.substring(0, stringWidth.length - 2);
   if(w < 680){
@@ -57,7 +55,7 @@ function handleClearButton(){
   $("#tidyButton").attr("disabled", true);
   setTimeout(clearBalls, 500);
 
-  //adds an animation so the balls scatter in random directions
+  // Adds an animation so the balls scatter in random directions
   for(let i = 0; i < balls.length; i++){
     let ball = balls[i];
     ball.dropFrom = [];
@@ -68,7 +66,7 @@ function handleClearButton(){
     else{ball.dx = Math.floor((Math.random() * 20) + 1); }
   }
 
-  //once the balls have scattered, clear array and reset fields
+  // Once the balls have scattered, clear array and reset fields
   function clearBalls(){
     balls = [];
     $("#canvas").click(handleClick);
@@ -83,7 +81,7 @@ function handleTidyButton(){
   $("#selectionsortButton").attr("disabled", false);
   $("#canvas").off("click");
 
-  //rearrange array on balls based on ascending x position
+  // Rearrange array of balls based on ascending x position
   let tempBalls = [];
   for(let i = 0; i <= canvas.width; i++){
     for(let j = 0; j < balls.length; j++){
@@ -94,7 +92,7 @@ function handleTidyButton(){
   }
   balls = tempBalls;
 
-  //move balls so that they're equal distance apart
+  // Move balls so that they're equal distance apart
   let dist = canvas.width / balls.length;
   let newX = dist/2;
   for(let i = 0; i < balls.length; i++){
@@ -117,7 +115,7 @@ function handleBubblesortButton(){
   let j = 0;
   let bubblesortTimer = setInterval(handleBubblesortTimer, 250);
 
-  //bubble sort algorithm
+  // Bubble sort algorithm
   function handleBubblesortTimer(){
     if(i >= balls.length - 1){
       clearInterval(bubblesortTimer);
@@ -157,7 +155,7 @@ function handleInsertionsortButton(){
   let key;
   let insertionsortTimer = setInterval(handleInsertionsortTimer, 250);
 
-  //insertion sort algorithm
+  // Insertion sort algorithm
   function handleInsertionsortTimer(){
     if(i >= balls.length){
       clearInterval(insertionsortTimer);
@@ -208,7 +206,7 @@ function handleSelectionsortButton(){
   let min = -1;
   let selectionSortTimer = setInterval(handleSelectionsortTimer, 250);
 
-  //selection sort algorithm
+  // Selection sort algorithm
   function handleSelectionsortTimer(){
     if(i > balls.length - 1){
       clearInterval(selectionSortTimer);
@@ -249,7 +247,7 @@ function handleTimer(){
   for(let i = 0; i < balls.length; i++){
     let ball = balls[i];
 
-    //if dropball is not null, ball is dropped from its current position
+    // If dropball is not null, ball is dropped from its current position
     if(ball.dropFrom.length > 0){
       if(ball.y + ball.r + ball.dy < canvas.height){
         ball.y += ball.dy;
@@ -262,7 +260,7 @@ function handleTimer(){
       }
     }
 
-    //if moveTo is not null, ball is moved to the given position
+    // If moveTo is not null, ball is moved to the given position
     else if(ball.moveTo.length > 0){
       if(ball.x + ball.dx <= ball.moveTo[0]){
         ball.x += ball.dx;
@@ -289,7 +287,7 @@ function handleTimer(){
       }
     }
 
-    //if clearFrom is not null, balls are moved in their random directions
+    // If clearFrom is not null, balls are moved in their random directions
     else if(ball.clearFrom.length > 0){
       ball.x += ball.dx;
       ball.y += ball.dy;
@@ -301,11 +299,11 @@ function handleTimer(){
 }
 
 function drawCanvas(){
-  //erase
+  // Erase canvas
   context.fillStyle = 'white';
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  //draw balls
+  // Draw balls
   context.strokeStyle = 'black';
   context.font = '10pt Arial';
   context.textAlign = 'center';
@@ -319,7 +317,7 @@ function drawCanvas(){
     context.fillText(ball.n, ball.x, ball.y + ball.r/3);
   }
 
-  //draw text
+  // Draw text
   context.font = '20pt Arial';
   context.textAlign = 'center';
   context.fillStyle = 'black';
@@ -327,7 +325,7 @@ function drawCanvas(){
   context.fillText(communicationString, canvas.width/2, canvas.height/6);
 }
 
-//because colours are fun
+// Returns random colour because colours are fun
 function randomColour(){
   let colours = [
     "#EF9A9A",

@@ -1,13 +1,13 @@
-//gets run every time page is loaded
+// Runs every time page is loaded
 checkColourCookie();
 
-//amends the css link to use the selected colour, then sets cookie
+// Amends the css link to use the selected colour, then sets cookie
 function changeColour(colour){
   document.getElementById('colourStyle').setAttribute('href', `/stylesheets/${colour}_theme.css`);
   setColourCookie(colour);
 }
 
-//sets cookie colour to exist for some date far into the future (can't set forever)
+// Sets cookie colour to exist for some date far into the future (can't set forever)
 function setColourCookie(colour){
   var date = new Date();
   date.setTime(date.getTime() + (1000 * 24 * 60 * 60 * 1000));
@@ -16,7 +16,7 @@ function setColourCookie(colour){
   console.log('Colour cookie set!')
 }
 
-//returns the value associated with the name colour in cookie
+// Returns the value associated with the name colour in cookie
 function getColourCookie() {
     var name = 'colour=';
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -33,7 +33,7 @@ function getColourCookie() {
     return '';
 }
 
-//sets colour based on cookie if cookie exists, otherwise sets default (blue)
+// Sets colour based on cookie if cookie exists, otherwise sets default (blue)
 function checkColourCookie(){
   let colour = getColourCookie();
   document.getElementById('colourStyle').setAttribute('href', `/stylesheets/${colour}_theme.css`);
@@ -45,4 +45,4 @@ function checkColourCookie(){
   }
 }
 
-//source: https://www.w3schools.com/js/js_cookies.asp
+// Source: https://www.w3schools.com/js/js_cookies.asp
