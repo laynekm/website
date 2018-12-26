@@ -11,11 +11,12 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
-    "morgan": "~1.9.0",
-    "request": "~2.87.0",
-    "socket.io": "~2.1.1",
-    "mysql": "~2.16.0",
+    "jquery": "~3.3.1",
     "keygenerator": "~1.0.4",
-    "serve-favicon": "~2.5.0"
+    "morgan": "~1.9.0",
+    "mysql": "~2.16.0",
+    "request": "~2.87.0",
+    "serve-favicon": "~2.5.0",
+    "socket.io": "~2.1.1"
   }
 }
