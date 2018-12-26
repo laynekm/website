@@ -17,11 +17,12 @@ exports.connect = function() {
       return;
     }
     console.log('Connected as ID: ' + connection.threadId);
+    init();
   });
 }
 
 // Initialize database components
-exports.init = function(){
+let init = function(){
   // Drop existing tables, if they exist
   let sql1 = "DROP TABLE IF EXISTS animals";
   let sql2 = "DROP TABLE IF EXISTS employees";
@@ -95,8 +96,6 @@ exports.init = function(){
       if(err) throw err;
     });
   }
-
-  console.log('Data populated.');
 }
 
 // Add animal to database, return to client the ID that was generated
