@@ -95,7 +95,6 @@ io.on('connection', function(socket){
 
 // DBMS components
 dbms.connect();
-dbms.init();
 app.post('/addAnimal', function(req, res) { dbms.addAnimal(req, res); });
 app.post('/queryAnimal', function(req, res) { dbms.queryAnimal(req, res); });
 app.get('/getAllAnimals', function(req, res) { dbms.getAllAnimals(req, res); });
