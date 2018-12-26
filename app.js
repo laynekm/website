@@ -8,7 +8,6 @@ var logger = require('morgan');
 var socket_io = require('socket.io');
 var favicon = require('serve-favicon');
 var url = require('url');
-var $ = require('jquery');
 
 // Import custom modules
 var dbms = require('./public/modules/server-dbms');
