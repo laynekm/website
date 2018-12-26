@@ -107,15 +107,12 @@ exports.addAnimal = function(req, res){
   let exhibit = req.body.exhibit;
 
   let sql = "INSERT INTO animals (id, name, species, type, exhibit) VALUES ('" + id + "', '" + name + "', '" + species + "', '" + type + "', '" + exhibit + "')";
-  console.log('Request: ', sql)
   connection.query(sql, function(err, result){
     if(err){
       res.send(err.toString());
-      console.log('Sending error');
     }
     else{
       res.send('Record added to database. \n ID: ' + id);
-      console.log('Sending success');
     }
   });
 }
