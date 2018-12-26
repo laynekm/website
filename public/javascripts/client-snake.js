@@ -3,28 +3,26 @@ let context = canvas.getContext('2d');
 let timer;
 let difficulty;
 
-//********************
-//GAME MENU
-//********************
 $(document).ready(function(){
   initMenu();
 });
 
+// Main menu
 function initMenu(){
   $("#canvas").mouseup(handleMouseUp);
 
-  //erase canvas
+  // Erase canvas
    context.fillStyle = 'black';
    context.fillRect(0, 0, canvas.width, canvas.height);
 
-   //set up formatting and colour
+   // Set up formatting and colour
    context.font = '30pt Arial';
    context.textAlign = 'center';
    context.fillStyle = 'white';
    context.strokeStyle = 'white';
    context.fillText("SNAKE", canvas.width*(1/2), 75);
 
-   //draw lines and labels
+   // Draw lines and labels
    context.font = '18pt Arial';
    context.fillRect(canvas.width*(1/3), 0, 1, canvas.height);
    context.fillRect(canvas.width*(2/3), 0, 1, canvas.height);
@@ -32,7 +30,7 @@ function initMenu(){
    context.fillText("Medium", canvas.width*(1/2), canvas.height*(1/3));
    context.fillText("Hard", canvas.width*(5/6), canvas.height*(1/3));
 
-   //snakes are animated by creating square then just alternating colours between black and white
+   // Snake animations (alternates squares between black and white in intervals)
    let easySnake = [];
    easySnake.push({h: 8, w: 8, x: 83, y: 216, colour: 'white'});
    easySnake.push({h: 8, w: 8, x: 93, y: 216, colour: 'white'});
@@ -123,9 +121,8 @@ function initMenu(){
 }
 
 function handleMouseUp(e){
-
-  //mouseup event determines where on screen user selected, which determines difficulty
-  //clears existing timer and sets up new timer, begins game
+  // Mouseup event determines where on screen user selected, which determines difficulty
+  // Clears existing timer and sets up new timer, begins game
   let rect = canvas.getBoundingClientRect();
   if(e.pageX - rect.left <= canvas.width*(1/3)){
     clearInterval(easyAnimationTimer);
@@ -159,13 +156,11 @@ function handleMouseUp(e){
   }
 }
 
-//********************
-//GAME ITSELF
-//********************
+// Game logic
 let snake = [];
 let pellet;
 
-//initializes game components
+// Initialize game components
 function initGame(){
   $(document).keydown(handleKeyDown);
 
@@ -198,7 +193,7 @@ function handleTimer(){
   snake[head].dx = dx;
   snake[head].dy = dy;
 
-  //detect and handle collission with walls
+  // Detect and handle collission with walls
   if(snake[head].x + snake[head].w + 1 == 640 && snake[head].dx == 10 ||
      snake[head].x - 1 == 0 && snake[head].dx == -10 ||
      snake[head].y + snake[head].h + 1 >= 480 && snake[head].dy == 10 ||
@@ -212,7 +207,7 @@ function handleTimer(){
        return;
   }
 
-  //detect and handle collission with snake itself
+  // Detect and handle collission with snake itself
   for(let i = 0; i < head; i++){
     if(snake[head].x + snake[head].w + 2 == snake[i].x && snake[head].y == snake[i].y && snake[head].dx == 10 ||
        snake[head].x - 2 == snake[i].x + snake[i].w && snake[head].y == snake[i].y && snake[head].dx == -10 ||
@@ -228,7 +223,7 @@ function handleTimer(){
     }
   }
 
-  //move snake
+  // Move snake
   for(let i = 0; i < head; i++){
     snake[i].x = snake[i+1].x;
     snake[i].y = snake[i+1].y;
@@ -236,11 +231,11 @@ function handleTimer(){
   snake[head].x += snake[head].dx;
   snake[head].y += snake[head].dy;
 
-  //detect and handle collission with pellet
+  // Detect and handle collission with pellet
   if(snake[head].x >= pellet.x && snake[head].x + snake[head].w <= pellet.x + pellet.w
   && snake[head].y >= pellet.y && snake[head].y + snake[head].h <= pellet.y + pellet.h){
 
-    //add 3 sections to snake for each pellet collission
+    // Add 3 sections to snake for each pellet collission
     for(let i = 0; i < 3; i++){
       snake.push({
         h: 8,
@@ -253,7 +248,7 @@ function handleTimer(){
       });
     }
 
-    //generate random location for pellet that does not collide with snake
+    // Generate random location for pellet that does not collide with snake
     let validCoords = 'false';
     let x;
     let y;
@@ -278,11 +273,11 @@ let down = 40;
 let right = 39;
 let left = 37;
 
-//handle snake movement depending on which key is pressed
-//ensure snake cannot move directly backwards
+// Hndle snake movement depending on which key is pressed
+// Ensure snake cannot move directly backwards
 function handleKeyDown(key){
 
-  //prevent browser page scrolling
+  // Prevent browser page scrolling
   if(key.which == up || key.which == down || key.which == left || key.which == right){
     key.view.event.preventDefault();
   }
@@ -307,24 +302,22 @@ function handleKeyDown(key){
 }
 
 function drawCanvas(){
-  //erase canvas
+  // Erase canvas
   context.fillStyle = 'black';
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  //draw snake
+  // Draw snake
   for(let i = 0; i < snake.length; i++){
     context.fillStyle = snake[i].colour;
     context.fillRect(snake[i].x, snake[i].y, snake[i].h, snake[i].w);
   }
 
-  //draw pellet
+  // Draw pellet
   context.fillStyle = pellet.colour;
   context.fillRect(pellet.x, pellet.y, pellet.h, pellet.w);
 }
 
-//********************
-//END GAME
-//********************
+// Endgame logic
 function endGame(){
   clearInterval(timer);
   drawCanvas();
@@ -336,9 +329,9 @@ function endGame(){
   context.fillStyle = 'white';
   context.strokeStyle = 'white';
 
-  //send difficulty and score to server
-  //receive back a JSON object of highscores, and an indication of whether or not
-  //the user has gotten a highscore themselves
+  // Send difficulty and score to server
+  // Receive back a JSON object of highscores, and an indication of whether or not
+  // the user has gotten a highscore themselves
   let postObj = {score: score, difficulty: difficulty};
   $.post('/playerScore', postObj, function(data, status){
     let highscorePos = data.highscorePos;
@@ -364,7 +357,7 @@ function endGame(){
       context.fillText(data.highscores[difficulty]['scores'][i] + '', canvas.width*(1/2) + 50, 200 + (i*25));
     }
 
-    //collect user's name, send back to server to be written into highscores
+    // Collect user's name, send back to server to be written into highscores
     function postName(){
       let name = prompt('Enter your name:');
       if(name){
@@ -374,7 +367,7 @@ function endGame(){
     }
   });
 
-  //return to menu to restart game
+  // Return to menu to restart game
   context.font = '18pt Arial';
   context.textAlign = 'center';
   context.fillText("Click to play again", canvas.width*(1/2), 430)

@@ -1,6 +1,6 @@
 function getRecipes() {
 
-  //read in from ingredient input field, verify it has been populated
+  // read in from ingredient input field, verify it has been populated
   let ingredients = document.getElementById('ingredient').value;
   if(!ingredients){return alert('Please enter ingredient(s)!');}
   let ingredientDiv = document.getElementById('recipes');
@@ -13,7 +13,7 @@ function getRecipes() {
       ingredientDiv.innerHTML = ingredientDiv.innerHTML +
       `<h1> Found ${response.count} recipes for ${ingredients} </h1>`;
 
-      //iterate through and add div  with title, image, link for each recipe
+      // Iterate through and add div  with title, image, link for each recipe
       let recipes = response.recipes;
       for(let x in recipes){
         let imageURL = recipes[x].image_url;
