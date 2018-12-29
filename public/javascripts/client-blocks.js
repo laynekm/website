@@ -1,4 +1,4 @@
-console.log('Welcome to Tetris.');
+console.log('Welcome to Puzzle Blocks.');
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
 $(document).keydown(handleKeyDown);
@@ -179,7 +179,6 @@ function handleKeyDown(key){
     piece1.move(-10);
   }
   else if(key.which == right && piece1.x + piece1.w < canvas.width){
-    console.log('move right');
     piece1.move(10);
   }
 
