@@ -13,7 +13,7 @@ class Block {
   }
 }
 
-class Tetromino {
+class Piece {
   constructor() {
     this.blocks = [];
     this.type = null;
@@ -38,7 +38,16 @@ class Tetromino {
     }
   }
 
-  // Populates tetromino with new blocks and drops them
+  rotate(dr) {
+    if(dr > 0){
+
+    }
+    else{
+
+    }
+  }
+
+  // Populates game piece with new blocks and drops them
   dropNewBlocks(type, x, y, dy) {
     this.type = type;
     this.x = x;
@@ -108,34 +117,34 @@ class Tetromino {
   }
 }
 
-let tetrominos = [];
-let tetromino1 = new Tetromino();
-tetromino1.dropNewBlocks('I', 50, 50, 5);
-tetrominos.push(tetromino1);
+let pieces = [];
+let piece1 = new Piece();
+piece1.dropNewBlocks('I', 50, 50, 5);
+pieces.push(piece1);
 
-let tetromino2 = new Tetromino();
-tetromino2.dropNewBlocks('J', 100, 50, 5);
-tetrominos.push(tetromino2);
+let piece2 = new Piece();
+piece2.dropNewBlocks('J', 100, 50, 5);
+pieces.push(piece2);
 
-let tetromino3 = new Tetromino();
-tetromino3.dropNewBlocks('L', 150, 50, 5);
-tetrominos.push(tetromino3);
+let piece3 = new Piece();
+piece3.dropNewBlocks('L', 150, 50, 5);
+pieces.push(piece3);
 
-let tetromino4 = new Tetromino();
-tetromino4.dropNewBlocks('O', 200, 50, 5);
-tetrominos.push(tetromino4);
+let piece4 = new Piece();
+piece4.dropNewBlocks('O', 200, 50, 5);
+pieces.push(piece4);
 
-let tetromino5 = new Tetromino();
-tetromino5.dropNewBlocks('S', 250, 50, 5);
-tetrominos.push(tetromino5);
+let piece5 = new Piece();
+piece5.dropNewBlocks('S', 250, 50, 5);
+pieces.push(piece5);
 
-let tetromino6 = new Tetromino();
-tetromino6.dropNewBlocks('T', 300, 50, 5);
-tetrominos.push(tetromino6);
+let piece6 = new Piece();
+piece6.dropNewBlocks('T', 300, 50, 5);
+pieces.push(piece6);
 
-let tetromino7 = new Tetromino();
-tetromino7.dropNewBlocks('Z', 350, 50, 5);
-tetrominos.push(tetromino7);
+let piece7 = new Piece();
+piece7.dropNewBlocks('Z', 350, 50, 5);
+pieces.push(piece7);
 
 let blocks = [];
 let level = 1;
@@ -146,12 +155,12 @@ $(document).ready(function() {
 
 function handleTimer() {
   drawCanvas();
-  for(tetromino of tetrominos) {
-    if(tetromino.y + tetromino.h < canvas.height) {
-      tetromino.drop();
+  for(piece of pieces) {
+    if(piece.y + piece.h < canvas.height) {
+      piece.drop();
     }
     else {
-      // Add blocks to main block array and remove from tetromino
+      // Add blocks to main block array and remove from game piece
     }
   }
 }
@@ -162,16 +171,23 @@ function handleKeyDown(key){
   let right = 39;
   let left = 37;
 
-  if(key.which == left || key.which == right){
+  if(key.which == left || key.which == right | key.which == up || key.which == down){
     key.view.event.preventDefault();
   }
 
-  if(key.which == left && tetromino1.x > 0){
-    tetromino1.move(-10);
+  if(key.which == left && piece1.x > 0){
+    piece1.move(-10);
   }
-  else if(key.which == right && tetromino1.x + tetromino1.w < canvas.width){
+  else if(key.which == right && piece1.x + piece1.w < canvas.width){
     console.log('move right');
-    tetromino1.move(10);
+    piece1.move(10);
+  }
+
+  if(key.which == up){
+    piece1.rotate(1);
+  }
+  else if(key.which == down){
+    piece1.rotate(-1);
   }
 }
 
@@ -186,8 +202,8 @@ function drawCanvas() {
     context.fillRect(block.x, block.y, block.h, block.w);
   }
 
-  for(tetromino of tetrominos) {
-    for(let block of tetromino.blocks) {
+  for(piece of pieces) {
+    for(let block of piece.blocks) {
       context.fillStyle = block.colour;
       context.fillRect(block.x, block.y, block.h, block.w);
     }
