@@ -3,11 +3,17 @@ let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
 $(document).keydown(handleKeyDown);
 
-const space = 32;
-const up = 38;
-const down = 40;
-const right = 39;
-const left = 37;
+const SPACE = 32;
+const UP = 38;
+const DOWN = 40;
+const RIGHT = 39;
+const LEFT = 37;
+const UNIT = 20; // Standard unit used throughout game
+
+let score = 0;
+let level = 1;
+let dropCounter = 0;
+let dropMax = 40;
 
 // Colour and relative offsets of game pieces at each rotation state
 // Maybe just save this as a JSON file?
@@ -15,8 +21,8 @@ const pieces = {
   'I': {
     colour: '#00ffff',
     state: [
-      [{x: 20, y: 00}, {x: 20, y: 20}, {x: 20, y: 40}, {x: 20, y: 60}],
-      [{x: 00, y: 20}, {x: 20, y: 20}, {x: 40, y: 20}, {x: 60, y: 20}],
+      [{x: UNIT, y: 00}, {x: 20, y: 20}, {x: 20, y: 40}, {x: 20, y: 60}],
+      [{x: 0, y: 20}, {x: 20, y: 20}, {x: 40, y: 20}, {x: 60, y: 20}],
       [{x: 40, y: 00}, {x: 40, y: 20}, {x: 40, y: 40}, {x: 40, y: 60}],
       [{x: 00, y: 40}, {x: 20, y: 40}, {x: 40, y: 40}, {x: 60, y: 40}],
     ]
@@ -78,10 +84,10 @@ const pieces = {
 }
 
 const board = {
-  x: 20,
-  y: 20,
-  h: 400,
-  w: 200,
+  x: UNIT,
+  y: UNIT,
+  h: UNIT * 20,
+  w: UNIT * 10,
   colours: ['#626262', '#4b4b4b']
 }
 
@@ -89,8 +95,8 @@ class Block {
   constructor(x, y, c) {
     this.x = x;
     this.y = y;
-    this.h = 20;
-    this.w = 20;
+    this.h = UNIT;
+    this.w = UNIT;
     this.colour = c;
   }
 }
@@ -98,7 +104,9 @@ class Block {
 class Piece {
   constructor() {
     this.blocks = [];
+    this.pieceBag = [];
     this.type = null;
+    this.nextType = this.randomType();
     this.x = 0;
     this.y = 0;
     this.dy = 0;
@@ -121,10 +129,10 @@ class Piece {
   }
 
   rotate(dr) {
-    if(dr > 0){
+    if(dr > 0) {
       this.r < 3 ? this.r += 1 : this.r = 0;
     }
-    else{
+    else {
       this.r > 0 ? this.r -= 1 : this.r = 3;
     }
     for(let i in this.blocks) {
@@ -135,14 +143,16 @@ class Piece {
 
   // Populates game piece with new blocks and drops them
   // If no argument is provided, it will use a randomly selected one
-  create(type = this.randomType()) {
+  create(type = this.nextType) {
     this.type = type;
-    this.x = 100;
-    this.y = 20;
+    this.x = UNIT * 5;
+    this.y = 0;
 
     for(let state of pieces[type].state[0]) {
-      this.blocks.push(new Block(this.x + state.x, this.y + state.y, pieces[type].colour));
+      this.blocks.push(new Block(this.x + state.x, this.y + state.y - UNIT, pieces[type].colour));
     }
+
+    this.nextType = this.randomType();
   }
 
   // Clears blocks array and returns a copy
@@ -152,40 +162,134 @@ class Piece {
     return blockCopies;
   }
 
+  // Choose type from a 'bag' of potential types to avoid strings of the same type
   randomType() {
-    let tempPieces = ['I', 'J', 'L', 'S', 'Z', 'T', 'O'];
-    return tempPieces[Math.floor(Math.random() * tempPieces.length)];
+    if (this.pieceBag.length === 0) {
+      this.pieceBag = ['I','I','I','I','J','J','J','J','L','L','L','L','S','S','S','S','Z','Z','Z','Z','T','T','T','T','O','O','O','O'];
+    }
+    return this.pieceBag.splice(Math.floor(Math.random() * this.pieceBag.length), 1);
   }
 }
 
+const nextPieceBoard = {
+  x: UNIT * 12,
+  y: UNIT * 2.5,
+  h: UNIT * 5,
+  w: UNIT * 9,
+  colour: '#626262',
+  nextPiece: Block,
+}
+
 let piece = new Piece();
-piece.create('T');
 let blocks = [];
+let gameStart = false;
+let gameOver = false;
 
 $(document).ready(function() {
-  timer = setInterval(handleTimer, 100);
+  timer = setInterval(handleTimer, 25);
 });
 
-let counter = 0;
-function handleTimer() {
-  drawCanvas();
-  counter++;
-  if(!validDrop(piece, 20)) {
-    blocks.push(...piece.destroy());
-    piece.create();
+function removeLines() {
+  let linesToRemove = [];
+  for(let i in blocks) {
+    let yValue = blocks[i].y;
+    let yCounter = 0;
+    for(let j in blocks) {
+      if(blocks[i].y === blocks[j].y){
+        yCounter++;
+      }
+    }
+
+    if(yCounter === 10) {
+      if(!linesToRemove.includes(yValue)) {
+        linesToRemove.push(yValue);
+      }
+    }
   }
 
-  if(counter == 10 && validDrop(piece, 20)) {
-    piece.drop(20);
-    counter = 0;
+  // Update line coord based on how many lines will be removed prior
+  for(let i = linesToRemove.length - 1; i >= 0; i--) {
+    linesToRemove[i] += UNIT * i;
+  }
+
+  for(let line of linesToRemove) {
+    blocks = blocks.filter(block => block.y !== line);
+    for(let block of blocks) {
+      if (block.y < line) {
+        block.y += UNIT;
+      }
+    }
+  }
+
+  return linesToRemove;
+}
+
+let updateScore = false;
+function updateValues(lines) {
+  for(let line of lines) {
+    score += 100;
+    updateScore = true;
+  }
+
+  if(score % 1000 === 0 && updateScore) {
+    level++;
+    updateScore = false;
+  }
+
+  dropMax <= 5 ? dropMax : dropMax = 40 - level * 4;
+}
+
+function handleGameOver() {
+  gameOver = true;
+  gameStart = false;
+  blocks = [];
+  piece.blocks = [];
+}
+
+function handleGameStart() {
+  gameStart = true;
+  gameOver = false;
+  score = 0;
+  llevel = 1;
+  dropCounter = 0;
+  dropMax = 40;
+  piece.create();
+}
+
+function handleTimer() {
+  drawCanvas();
+  dropCounter++;
+
+  if(dropCounter == dropMax && !validDrop(piece, UNIT)) {
+    blocks.push(...piece.destroy());
+    updateValues(removeLines());
+    piece.create();
+    dropCounter = 0;
+    for(let block of blocks) {
+      if(block.y <= board.y) {
+        handleGameOver();
+      }
+    }
+  }
+
+  if(dropCounter == dropMax && validDrop(piece, UNIT)) {
+    piece.drop(UNIT);
+    dropCounter = 0;
   }
 }
 
 function validMove(piece, dx) {
-  for(block of piece.blocks) {
+  for(let block of piece.blocks) {
     if(block.x + dx < board.x ||
         block.x + block.w + dx > board.x + board.w) {
         return false;
+    }
+  }
+  for(let block of piece.blocks) {
+    for(let j in blocks) {
+      if(block.x + dx === blocks[j].x && block.y === blocks[j].y) {
+        return false;
+      }
     }
   }
   return true;
@@ -206,32 +310,63 @@ function validDrop(piece, dy) {
 }
 
 function validRotate(piece, dr) {
+  let tempR;
+  if(dr > 0) {
+    piece.r < 3 ? tempR = piece.r + 1 : tempR = 0;
+  }
+  else {
+    piece.r > 0 ? tempR = piece.r - 1 : tempR = 3;
+  }
+
+  // Check if blocks out of bounds of board
+  for(let i in piece.blocks) {
+    if(piece.x + pieces[piece.type].state[tempR][i].x >= board.x + board.w ||
+       piece.x + pieces[piece.type].state[tempR][i].x < board.x ||
+       piece.y + pieces[piece.type].state[tempR][i].y >= board.y + board.h) {
+         return false;
+       }
+  }
+
+  // Check if blocks collide with any other blocks
+  for(let i in piece.blocks) {
+    for(let j in blocks) {
+      if(piece.x + pieces[piece.type].state[tempR][i].x === blocks[j].x &&
+         piece.y + pieces[piece.type].state[tempR][i].y === blocks[j].y) {
+           return false;
+         }
+    }
+  }
+
   return true;
 }
 
 function handleKeyDown(key){
   // Prevents page from scrolling
-  if(key.which == space || key.which == left || key.which == right | key.which == up || key.which == down){
+  if(key.which == SPACE || key.which == LEFT || key.which == RIGHT | key.which == UP || key.which == DOWN){
     key.view.event.preventDefault();
   }
 
-  if(key.which == left && validMove(piece, -20)){
+  if(key.which == SPACE && !gameStart) {
+    handleGameStart();
+  }
+
+  if(key.which == LEFT && validMove(piece, -20)){
     piece.move(-20);
   }
-  else if(key.which == right && validMove(piece, 20)){
+  else if(key.which == RIGHT && validMove(piece, 20)){
     piece.move(20);
   }
 
-  if(key.which == up && validRotate(1)){
+  if(key.which == UP && validRotate(piece, 1)){
     piece.rotate(1);
   }
-  else if(key.which == down && validRotate(-1)){
+  else if(key.which == DOWN && validRotate(piece, -1)){
     piece.rotate(-1);
   }
 
-  if(key.which == space && validDrop(piece, 20)){
+  if(key.which == SPACE && validDrop(piece, 20)){
     piece.drop(20);
-    counter = 0;
+    dropCounter = 0;
   }
 }
 
@@ -246,6 +381,26 @@ function drawCanvas() {
     context.fillRect(i * 20, 20, 20, board.h);
   }
 
+  // Draw board that shows the next piece
+  context.fillStyle = nextPieceBoard.colour;
+  context.fillRect(nextPieceBoard.x, nextPieceBoard.y, nextPieceBoard.w, nextPieceBoard.h)
+  if(gameStart && piece.nextType) {
+    for(let block of pieces[piece.nextType].state[0]) {
+      context.fillStyle = 'black';
+      context.fillRect(nextPieceBoard.x + block.x + UNIT * 2, nextPieceBoard.y + block.y + UNIT, UNIT, UNIT);
+      context.fillStyle = pieces[piece.nextType].colour;
+      context.fillRect(nextPieceBoard.x + block.x + 1 + UNIT * 2, nextPieceBoard.y + block.y + 1 + UNIT, UNIT- 2, UNIT - 2);
+    }
+  }
+
+  // Draw labels
+  context.textAlign = 'left';
+  context.fillStyle = 'white';
+  context.font = '14pt Arial';
+  context.fillText('Next piece:', UNIT * 12, UNIT * 2);
+  context.fillText('Level: ' + level, UNIT * 12, UNIT * 9);
+  context.fillText('Score: ' + score, UNIT * 12, UNIT * 11 )
+
   // Draw blocks in game board
   for(let block of blocks) {
     context.fillStyle = 'black';
@@ -256,9 +411,28 @@ function drawCanvas() {
 
   // Draw blocks in game piece
   for(let block of piece.blocks) {
-    context.fillStyle = 'black';
-    context.fillRect(block.x, block.y, block.w, block.h)
-    context.fillStyle = block.colour;
-    context.fillRect(block.x + 1, block.y + 1, block.w - 2, block.h - 2);
+    if(block.y >= board.y) {
+      context.fillStyle = 'black';
+      context.fillRect(block.x, block.y, block.w, block.h)
+      context.fillStyle = block.colour;
+      context.fillRect(block.x + 1, block.y + 1, block.w - 2, block.h - 2);
+    }
+  }
+
+  if (!gameStart && !gameOver) {
+    context.fillStyle = 'white';
+    context.font = '14pt Arial';
+    context.textAlign = 'center';
+    context.fillText('Press space to play', (board.x + board.w) / 2 + UNIT / 2, UNIT * 10);
+  }
+
+  if (gameOver) {
+    context.fillStyle = 'white';
+    context.font = 'bold 40pt Arial';
+    context.textAlign = 'center';
+    context.fillText('GAME', (board.x + board.w) / 2 + UNIT / 2, UNIT * 10);
+    context.fillText('OVER', (board.x + board.w) / 2 + UNIT / 2, UNIT * 14);
+    context.font = '14pt Arial';
+    context.fillText('Press space to play', (board.x + board.w) / 2 + UNIT / 2, UNIT * 18);
   }
 }
