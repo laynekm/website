@@ -1,27 +1,29 @@
-console.log('Welcome to Puzzle Blocks.');
-let canvas = document.getElementById('canvas');
-let context = canvas.getContext('2d');
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext('2d');
 $(document).keydown(handleKeyDown);
+$(document).ready(() => { timer = setInterval(handleTimer, 25) });
 
 const SPACE = 32;
 const UP = 38;
 const DOWN = 40;
 const RIGHT = 39;
 const LEFT = 37;
-const UNIT = 20; // Standard unit used throughout game
-
+const UNIT = 20;
 let score = 0;
 let level = 1;
 let dropCounter = 0;
 let dropMax = 40;
+let blocks = [];
+let gameStart = false;
+let gameOver = false;
 
 // Colour and relative offsets of game pieces at each rotation state
-// Maybe just save this as a JSON file?
+// TODO: convert to generic UNITs, or maybe store in a separate JSON file?
 const pieces = {
   'I': {
     colour: '#00ffff',
     state: [
-      [{x: UNIT, y: 00}, {x: 20, y: 20}, {x: 20, y: 40}, {x: 20, y: 60}],
+      [{x: 20, y: 00}, {x: 20, y: 20}, {x: 20, y: 40}, {x: 20, y: 60}],
       [{x: 0, y: 20}, {x: 20, y: 20}, {x: 40, y: 20}, {x: 60, y: 20}],
       [{x: 40, y: 00}, {x: 40, y: 20}, {x: 40, y: 40}, {x: 40, y: 60}],
       [{x: 00, y: 40}, {x: 20, y: 40}, {x: 40, y: 40}, {x: 60, y: 40}],
@@ -88,7 +90,7 @@ const board = {
   y: UNIT,
   h: UNIT * 20,
   w: UNIT * 10,
-  colours: ['#626262', '#4b4b4b']
+  colours: ['#626262', '#4b4b4b'],
 }
 
 class Block {
@@ -104,7 +106,7 @@ class Block {
 class Piece {
   constructor() {
     this.blocks = [];
-    this.pieceBag = [];
+    this.potentialPieces = [];
     this.type = null;
     this.nextType = this.randomType();
     this.x = 0;
@@ -141,15 +143,14 @@ class Piece {
     }
   }
 
-  // Populates game piece with new blocks and drops them
-  // If no argument is provided, it will use a randomly selected one
+  // Populates game piece with new blocks based on type
   create(type = this.nextType) {
     this.type = type;
     this.x = UNIT * 5;
     this.y = 0;
 
-    for(let state of pieces[type].state[0]) {
-      this.blocks.push(new Block(this.x + state.x, this.y + state.y - UNIT, pieces[type].colour));
+    for(let block of pieces[type].state[0]) {
+      this.blocks.push(new Block(this.x + block.x, this.y + block.y - UNIT, pieces[type].colour));
     }
 
     this.nextType = this.randomType();
@@ -164,10 +165,10 @@ class Piece {
 
   // Choose type from a 'bag' of potential types to avoid strings of the same type
   randomType() {
-    if (this.pieceBag.length === 0) {
-      this.pieceBag = ['I','I','I','I','J','J','J','J','L','L','L','L','S','S','S','S','Z','Z','Z','Z','T','T','T','T','O','O','O','O'];
+    if (this.potentialPieces.length === 0) {
+      this.potentialPieces = ['I','I','I','I','J','J','J','J','L','L','L','L','S','S','S','S','Z','Z','Z','Z','T','T','T','T','O','O','O','O'];
     }
-    return this.pieceBag.splice(Math.floor(Math.random() * this.pieceBag.length), 1);
+    return this.potentialPieces.splice(Math.floor(Math.random() * this.potentialPieces.length), 1);
   }
 }
 
@@ -180,17 +181,14 @@ const nextPieceBoard = {
   nextPiece: Block,
 }
 
+// Only one Piece is created and its block contents are continually updated
 let piece = new Piece();
-let blocks = [];
-let gameStart = false;
-let gameOver = false;
 
-$(document).ready(function() {
-  timer = setInterval(handleTimer, 25);
-});
-
+// Removes blocks from board and returns array of the lines removed (ie. their yCoords)
 function removeLines() {
   let linesToRemove = [];
+
+  // If 10 blocks have the same yCoord, add that yCoord to linesToRemove
   for(let i in blocks) {
     let yValue = blocks[i].y;
     let yCounter = 0;
@@ -202,7 +200,7 @@ function removeLines() {
 
     if(yCounter === 10) {
       if(!linesToRemove.includes(yValue)) {
-        linesToRemove.push(yValue);
+        linesToRemove.unshift(yValue);
       }
     }
   }
@@ -212,6 +210,7 @@ function removeLines() {
     linesToRemove[i] += UNIT * i;
   }
 
+  // Remove blocks at given yCoords and shift all above blocks down
   for(let line of linesToRemove) {
     blocks = blocks.filter(block => block.y !== line);
     for(let block of blocks) {
@@ -224,6 +223,8 @@ function removeLines() {
   return linesToRemove;
 }
 
+// Update game values based on lines removed
+// (1 line --> 100 points, 1000 points --> new level, level 10 is max)
 let updateScore = false;
 function updateValues(lines) {
   for(let line of lines) {
@@ -250,21 +251,25 @@ function handleGameStart() {
   gameStart = true;
   gameOver = false;
   score = 0;
-  llevel = 1;
+  level = 1;
   dropCounter = 0;
   dropMax = 40;
   piece.create();
 }
 
+// Game loop
 function handleTimer() {
   drawCanvas();
   dropCounter++;
 
+  // Case where piece cannot be dropped any further
   if(dropCounter == dropMax && !validDrop(piece, UNIT)) {
     blocks.push(...piece.destroy());
     updateValues(removeLines());
     piece.create();
     dropCounter = 0;
+
+    // End game if any blocks have reached the top of the board
     for(let block of blocks) {
       if(block.y <= board.y) {
         handleGameOver();
@@ -272,43 +277,53 @@ function handleTimer() {
     }
   }
 
+  // Case where piece can be dropped
   if(dropCounter == dropMax && validDrop(piece, UNIT)) {
     piece.drop(UNIT);
     dropCounter = 0;
   }
 }
 
+// Checks if left/right movement is valid
 function validMove(piece, dx) {
   for(let block of piece.blocks) {
+    // Checks if block collides with board boundaries
     if(block.x + dx < board.x ||
         block.x + block.w + dx > board.x + board.w) {
         return false;
     }
-  }
-  for(let block of piece.blocks) {
+
+    // Checks if block collides with other blocks
     for(let j in blocks) {
       if(block.x + dx === blocks[j].x && block.y === blocks[j].y) {
         return false;
       }
     }
   }
+
   return true;
 }
 
+// Checks if downward movement is valid
 function validDrop(piece, dy) {
   for(let pieceBlock of piece.blocks) {
+    // Check if block collides with board boundaries
     if(pieceBlock.y + pieceBlock.h + dy > board.y + board.h) {
       return false;
     }
+
+    // Check if block collides with other blocks
     for(let gameBlock of blocks) {
       if(pieceBlock.y + pieceBlock.h + dy > gameBlock.y && pieceBlock.x === gameBlock.x) {
         return false;
       }
     }
   }
+
   return true;
 }
 
+// Checks if rotation is valid
 function validRotate(piece, dr) {
   let tempR;
   if(dr > 0) {
@@ -318,17 +333,15 @@ function validRotate(piece, dr) {
     piece.r > 0 ? tempR = piece.r - 1 : tempR = 3;
   }
 
-  // Check if blocks out of bounds of board
   for(let i in piece.blocks) {
+    // Check if blocks collide with board boundaries
     if(piece.x + pieces[piece.type].state[tempR][i].x >= board.x + board.w ||
        piece.x + pieces[piece.type].state[tempR][i].x < board.x ||
        piece.y + pieces[piece.type].state[tempR][i].y >= board.y + board.h) {
          return false;
        }
-  }
 
-  // Check if blocks collide with any other blocks
-  for(let i in piece.blocks) {
+    // Check if block collides with other blocks
     for(let j in blocks) {
       if(piece.x + pieces[piece.type].state[tempR][i].x === blocks[j].x &&
          piece.y + pieces[piece.type].state[tempR][i].y === blocks[j].y) {
@@ -419,6 +432,7 @@ function drawCanvas() {
     }
   }
 
+  // Draw initial screen
   if (!gameStart && !gameOver) {
     context.fillStyle = 'white';
     context.font = '14pt Arial';
@@ -426,6 +440,7 @@ function drawCanvas() {
     context.fillText('Press space to play', (board.x + board.w) / 2 + UNIT / 2, UNIT * 10);
   }
 
+  // Draw game over screen
   if (gameOver) {
     context.fillStyle = 'white';
     context.font = 'bold 40pt Arial';
