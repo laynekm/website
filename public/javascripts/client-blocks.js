@@ -188,29 +188,26 @@ let piece = new Piece();
 function removeLines() {
   let linesToRemove = [];
 
-  // If 10 blocks have the same yCoord, add that yCoord to linesToRemove
-  for(let i in blocks) {
-    let yValue = blocks[i].y;
-    let yCounter = 0;
-    for(let j in blocks) {
-      if(blocks[i].y === blocks[j].y){
-        yCounter++;
+  // Add each row with 10 blocks in it to linesToRemove
+  for(let i = board.y; i < board.y + board.h; i += UNIT) {
+    let counter = 0;
+    for(let block of blocks) {
+      if(block.y === i) {
+        counter++;
       }
     }
 
-    if(yCounter === 10) {
-      if(!linesToRemove.includes(yValue)) {
-        linesToRemove.unshift(yValue);
+    // When a line is added, update the other lines to reflect their future value
+    // (ie. the line at UNIT will become UNIT+! once the original UNIT+! is removed)
+    if(counter === 10) {
+      for(let line in linesToRemove) {
+        line += UNIT;
       }
+      linesToRemove.push(i);
     }
   }
 
-  // Update line coord based on how many lines will be removed prior
-  for(let i = linesToRemove.length - 1; i >= 0; i--) {
-    linesToRemove[i] += UNIT * i;
-  }
-
-  // Remove blocks at given yCoords and shift all above blocks down
+  // Remove blocks at given y-coord and shift all above blocks down
   for(let line of linesToRemove) {
     blocks = blocks.filter(block => block.y !== line);
     for(let block of blocks) {
@@ -229,12 +226,9 @@ let updateScore = false;
 function updateValues(lines) {
   for(let line of lines) {
     score += 100;
-    updateScore = true;
-  }
-
-  if(score % 1000 === 0 && updateScore) {
-    level++;
-    updateScore = false;
+    if(score % 1000 === 0) {
+      level++;
+    }
   }
 
   dropMax <= 5 ? dropMax : dropMax = 40 - level * 4;
