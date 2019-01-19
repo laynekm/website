@@ -17,8 +17,6 @@ let blocks = [];
 let gameStart = false;
 let gameOver = false;
 
-// Colour and relative offsets of game pieces at each rotation state
-// TODO: convert to generic UNITs, or maybe store in a separate JSON file?
 const pieces = {
   'I': {
     colour: '#00ffff',
@@ -357,11 +355,11 @@ function handleKeyDown(key){
     handleGameStart();
   }
 
-  if(key.which == LEFT && validMove(piece, -20)){
-    piece.move(-20);
+  if(key.which == LEFT && validMove(piece, -UNIT)){
+    piece.move(-UNIT);
   }
-  else if(key.which == RIGHT && validMove(piece, 20)){
-    piece.move(20);
+  else if(key.which == RIGHT && validMove(piece, UNIT)){
+    piece.move(UNIT);
   }
 
   if(key.which == UP && validRotate(piece, 1)){
@@ -371,8 +369,8 @@ function handleKeyDown(key){
     piece.rotate(-1);
   }
 
-  if(key.which == SPACE && validDrop(piece, 20)){
-    piece.drop(20);
+  if(key.which == SPACE && validDrop(piece, UNIT)){
+    piece.drop(UNIT);
     dropCounter = 0;
   }
 }
@@ -385,7 +383,7 @@ function drawCanvas() {
   // Draw board
   for(let i = 1; i <= 10; i++){
     i % 2 == 0 ? context.fillStyle = board.colours[0] : context.fillStyle = board.colours[1];
-    context.fillRect(i * 20, 20, 20, board.h);
+    context.fillRect(i * UNIT, UNIT, UNIT, board.h);
   }
 
   // Draw board that shows the next piece
