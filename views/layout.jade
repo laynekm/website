@@ -14,52 +14,64 @@ html
       .navbar-links
         a(href='https://www.github.com/laynekm')
           i.fab.fa-git-square
-          |Github
+          | Github
         a(href='https://www.linkedin.com/in/laynekm/')
           i.fab.fa-linkedin
-          |LinkedIn
+          | LinkedIn
         a(href='/contact') Contact
         a(href='/privacy') Privacy Policy  
     .sidenav-container
     .sidenav
       button.dropdown-btn
-        i.fab.fa-js-square
-        |  Frameworks
-        i.fa.fa-caret-down
-      .dropdown-container
-        a(href='/dbms') Bootstrap (DBMS)
-      button.dropdown-btn
-        i.fas.fa-gamepad
-        |  Games
-        i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-gamepad
+        .sidenav-text-container
+          | Games
+          i.fa.fa-caret-down
       .dropdown-container
         a(href='/snake') Snake
         a(href='/blocks') Puzzle Blocks
       button.dropdown-btn
-        i.fas.fa-chart-pie
-        i.fa.fa-caret-down
-        |  Visualizations
+        .sidenav-icon-container
+          i.fas.fa-database
+        .sidenav-text-container
+          | Databases
+          i.fa.fa-caret-down
+      .dropdown-container
+        a(href='/dbms') Zoo DBMS
+      button.dropdown-btn
+        .sidenav-icon-container
+          i.fas.fa-chart-pie
+        .sidenav-text-container
+          i.fa.fa-caret-down
+          |  Visualizations
       .dropdown-container
         a(href='/bubblesort') Bubble Sort
         a(href='/insertionsort') Insertion Sort
         a(href='/selectionsort') Selection Sort
       button.dropdown-btn
-        i.fas.fa-cloud
-        |  API Examples
-        i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-cloud
+        .sidenav-text-container
+          |  API Examples
+          i.fa.fa-caret-down
       .dropdown-container
         a(href='/recipes') Recipes
         a(href='/films') Films
       button.dropdown-btn
-        i.fas.fa-server
-        |  Sockets
-        i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-server
+        .sidenav-text-container
+          |  Sockets
+          i.fa.fa-caret-down
       .dropdown-container
         a(href='/magnets') Fridge Magnets
       button.dropdown-btn
-        i.fas.fa-palette
-        | Change Theme
-        i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-palette
+        .sidenav-text-container
+          | Customize
+          i.fa.fa-caret-down
       .dropdown-container
         button#redButton(type='button', class='colour-container-button', onclick="changeColour('red')", style='background-color:#D50000;')
         button#orangeButton(type='button', class='colour-container-button', onclick="changeColour('orange')", style='background-color:#EF6C00;')
@@ -79,42 +91,49 @@ html
     .mobile-sidenav-container
     .mobile-sidenav
       button.dropdown-btn
-        i.fab.fa-js-square
-        |  Frameworks
-        //i.fa.fa-caret-down
-      .dropdown-container
-        a(href='/dbms') Bootstrap (DBMS)
-      button.dropdown-btn
-        i.fas.fa-gamepad
-        |  Games
-        //i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-gamepad
+        .sidenav-text-container
+          | Games
       .dropdown-container
         a(href='/snake') Snake
+        a(href='/blocks') Puzzle Blocks
       button.dropdown-btn
-        i.fas.fa-chart-pie
-        |  Visualizations
-        //i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-database
+        .sidenav-text-container
+          | Databases
+      .dropdown-container
+        a(href='/dbms') Zoo DBMS
+      button.dropdown-btn
+        .sidenav-icon-container
+          i.fas.fa-chart-pie
+        .sidenav-text-container
+          |  Visualizations
       .dropdown-container
         a(href='/bubblesort') Bubble Sort
         a(href='/insertionsort') Insertion Sort
         a(href='/selectionsort') Selection Sort
       button.dropdown-btn
-        i.fas.fa-cloud
-        |  API Examples
-        //i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-cloud
+        .sidenav-text-container
+          |  API Examples
       .dropdown-container
         a(href='/recipes') Recipes
         a(href='/films') Films
       button.dropdown-btn
-        i.fas.fa-server
-        |  Sockets
-        //i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-server
+        .sidenav-text-container
+          |  Sockets
       .dropdown-container
         a(href='/magnets') Fridge Magnets
       button.dropdown-btn
-        i.fas.fa-palette
-        | Change Theme
-        //i.fa.fa-caret-down
+        .sidenav-icon-container
+          i.fas.fa-palette
+        .sidenav-text-container
+          | Customize
       .dropdown-container
         button#redButton(type='button', class='colour-container-button', onclick="changeColour('red')", style='background-color:#D50000;')
         button#orangeButton(type='button', class='colour-container-button', onclick="changeColour('orange')", style='background-color:#EF6C00;')
@@ -125,17 +144,22 @@ html
         button#violetButton(type='button', class='colour-container-button', onclick="changeColour('violet')", style='background-color:#AB47BC;')
         button#darkButton(type='button', class='colour-container-button', onclick="changeColour('dark')", style='background-color:#1a1a1a;')
         p(style='font-size: 10px; padding: 5px; padding-bottom: 15px;') *Selecting a theme stores a cookie in your browser to remember your choice.
-      br
       hr
       br
       a(href='https://github.com/laynekm')
-        i.fab.fa-git-square
-        | Github
+        .sidenav-icon-container
+          i.fab.fa-git-square
+        .sidenav-text-container
+          | Github
       a(href='https://www.linkedin.com/in/laynekm/')
-        i.fab.fa-linkedin
-        | LinkedIn
-      a(href='/contact') Contact
-      a(href='/privacy') Privacy Policy
+        .sidenav-icon-container
+          i.fab.fa-linkedin
+        .sidenav-text-container
+          | LinkedIn
+      .sidenav-icon-contaner
+        a(href='/contact') Contact
+      .sidenav-icon-container
+        a(href='/privacy') Privacy Policy
           
       script.
         let dropdown = document.getElementsByClassName("dropdown-btn");
