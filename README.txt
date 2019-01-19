@@ -3,11 +3,14 @@ A personal website I'm working on using the Express framework for Node. Hosted o
 Homepage:
 http://laynekm.com
 
-DBMS: 
-http://laynekm.com/dbms
-
 Snake: 
 http://laynekm.com/snake
+
+Puzzle Blocks:
+http://laynekm.com/blocks
+
+DBMS: 
+http://laynekm.com/dbms
 
 Algorithms:
 http://laynekm.com/bubblesort
