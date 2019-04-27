@@ -21,5 +21,5 @@ APIs:
 http://laynekm.com/recipes  
 http://laynekm.com/films  
 
-Sockets:  
+Miscellaneous:  
 http://laynekm.com/magnets  
