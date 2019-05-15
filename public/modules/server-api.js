@@ -1,6 +1,11 @@
 var requestModule = require('request');
+<<<<<<< HEAD
 var food2forkAPIkey = process.env.FOOD2FORK_API_KEY;
 var omdbAPIkey = process.env.OMDB_API_KEY;
+=======
+var food2forkAPIkey = '4412f88374374b2109834163385bdf2e';
+var omdbAPIkey = '302ed21e';
+>>>>>>> d737864fcaa56062379e78f97d92af234907e118
 
 // Calls food2fork API and returns JSON data of recipes
 exports.recipes = function(req, res){
