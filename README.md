@@ -1,25 +1,25 @@
 A personal website I'm working on using the Express framework for Node. Hosted on AWS.
 
 Homepage:  
-http://laynekm.com
+https://laynekm.com
 
 Snake:  
-http://laynekm.com/snake
+https://laynekm.com/snake
 
 Puzzle Blocks:  
-http://laynekm.com/blocks
+https://laynekm.com/blocks
 
 DBMS:  
-http://laynekm.com/dbms
+https://laynekm.com/dbms
 
 Algorithms:  
-http://laynekm.com/bubblesort  
-http://laynekm.com/insertionsort  
-http://laynekm.com/selectionsort  
+https://laynekm.com/bubblesort  
+https://laynekm.com/insertionsort  
+https://laynekm.com/selectionsort  
 
 APIs:  
-http://laynekm.com/recipes  
-http://laynekm.com/films  
+https://laynekm.com/recipes  
+https://laynekm.com/films  
 
 Miscellaneous:  
-http://laynekm.com/magnets  
+https://laynekm.com/magnets  
