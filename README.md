@@ -6,8 +6,8 @@ https://laynekm.com
 Snake:  
 https://laynekm.com/snake
 
-Puzzle Blocks:  
-https://laynekm.com/blocks
+Tetris:  
+https://laynekm.com/tetris
 
 DBMS:  
 https://laynekm.com/dbms
