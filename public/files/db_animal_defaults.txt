@@ -1,0 +1,24 @@
+Turkish, Polar Bear, Mammal, Arctic
+Tommy, Polar Bear, Mammal, Arctic
+Mickey, Walrus, Mammal, Arctic
+Franky, Walrus, Mammal, Arctic
+Vinny, Penguin, Bird, Arctic
+Gustave, Iguana, Reptile, Savannah
+Zero, Salamander, Reptile, Savannah
+Dmitri, Elephant, Mammal, Savannah
+Mr. Moustafa, Lion, Mammal, Savannah
+Agatha, Flamingo, Bird, Savannah
+Raoul Duke, Raccoon, Mammal, Temperate
+Dr. Gonzo, Grizzly Bear, Mammal, Temperate
+Vincent, Blue-Eyed Hawk, Bird, Temperate
+Jules, Rare Hopping Frog, Amphibian, Temperate
+Marsellus, Slippery Toad, Amphibian, Temperate
+Aldo, Walrus, Mammal, Marine
+Hans, Orca, Mammal, Marine
+Shoshanna, Rainbow Fish, Fish, Marine
+Donny, Clown Fish, Fish, Marine
+Hugo, Winged Cossack, Fish, Marine
+Grant, Tyrannosaurus Rex, Reptile, Jurassic
+Malcolm, Velociraptor, Reptile, Jurassic
+Muldoon, Triceratops, Reptile, Jurassic
+Arnold, Stegosaurus, Reptile, Jurassic

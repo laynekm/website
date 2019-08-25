@@ -1,1 +1,0 @@
-{"easy":{"names":["Empty","Empty","Empty"],"scores":[0,0,0]},"medium":{"names":["test","Empty","Empty"],"scores":[6,0,0]},"hard":{"names":["Name","Empty","Empty"],"scores":[3,0,0]}}

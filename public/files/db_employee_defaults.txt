@@ -1,0 +1,15 @@
+Emre Hamer, Handler, Arctic
+Leighton Parkinson, Handler, Savannah
+Komal William, Handler, Temperate
+Brody Ellison, Handler, Marine
+Paula Lin, Handler, Jurassic
+Harylee Peel, Maintenance, Cleaning
+Byron Whyte, Maintenance, Plumbing
+Cherish Fritz, Maintenance, Electric
+Aleeza Hayden, Maintenance, Shipping
+Clay Haigh, Maintenance, Receiving
+Kavita Weston, Administrator, Office Administration
+Ismael Oconnor, Administrator, Field Administration
+Raymond Lang, Administrator, Public Relations
+Daria Shea, Administrator, Human Resources
+Ayda Winter, Administrator, IT

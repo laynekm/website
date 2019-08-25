@@ -7,7 +7,7 @@ exports.init = function(){
                           medium: {names: ['Empty', 'Empty', 'Empty'], scores: [0, 0, 0]},
                           hard:   {names: ['Empty', 'Empty', 'Empty'], scores: [0, 0, 0]}};
   let snakeHighscoresJSON = JSON.stringify(snakeHighscores);
-  fs.writeFile('./public/files/snakeHighscores.txt', snakeHighscoresJSON, function(err, data){
+  fs.writeFile('./public/files/snake_highscores.txt', snakeHighscoresJSON, function(err, data){
     if(err){ console.log('ERROR: ' + JSON.stringify(err)); }
     else{ console.log('SAVED!'); }
   });
@@ -21,7 +21,7 @@ exports.determineHighscore = function(req, res){
   let highscorePos = 6;
 
   // Read in text file and determine if player beat any of the highscores
-  fs.readFile('./public/files/snakeHighscores.txt', function(err, data){
+  fs.readFile('./public/files/snake_highscores.txt', function(err, data){
     if(err){throw err;}
     snakeHighscores = JSON.parse(data);
     for(let i in snakeHighscores){
@@ -64,7 +64,7 @@ exports.setHighscore = function(req, res){
 
   // Write the amended highscore object to text file
   let snakeHighscoresJSON = JSON.stringify(snakeHighscores);
-  fs.writeFile('./public/files/snakeHighscores.txt', snakeHighscoresJSON, function(err, data){
+  fs.writeFile('./public/files/snake_highscores.txt', snakeHighscoresJSON, function(err, data){
     if(err){ console.log('ERROR: ' + JSON.stringify(err)); }
     res.sendStatus(200);
   });
