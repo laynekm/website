@@ -6,10 +6,11 @@ var connection;
 // Connect to database
 exports.connect = function() {
   connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'zoodb'
+    host:     process.env.RDS_HOSTNAME,
+    user:     process.env.RDS_USERNAME,
+    password: process.env.RDS_PASSWORD,
+    port:     process.env.RDS_PORT,
+    database: process.env.RDS_DB_NAME
   });
 
   connection.connect(function(err){
@@ -17,6 +18,7 @@ exports.connect = function() {
       console.error('Error connecting: ' + err.stack);
       return;
     }
+
     console.log('Connected as ID: ' + connection.threadId);
     init();
   });
@@ -26,7 +28,7 @@ exports.connect = function() {
 // If the table count is not equal to 2, then at least one of the tables does not exist
 // So drop both tables if they exist (in case one exists and one doesn't) and recreate them
 // If you want to always recreate the tables, just comment out "if (result[0]['COUNT(*)'] === 2) return"
-let init = () => {
+function init() {
   let checkIfTablesExist = `SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'zoodb' AND (table_name = 'animals' OR table_name = 'employees')`;
   connection.query(checkIfTablesExist, (err, result) => {
     if (err) throw err;
@@ -38,7 +40,7 @@ let init = () => {
   })
 }
 
-let dropTables = () => {
+function dropTables() {
   let dropAnimals = "DROP TABLE IF EXISTS animals";
   let dropEmployees = "DROP TABLE IF EXISTS employees";
   connection.query(dropAnimals, function(err, result){
@@ -51,7 +53,7 @@ let dropTables = () => {
   });
 }
 
-let createTables = () => {
+function createTables() {
   let sql3 = "CREATE TABLE animals(id VARCHAR(100), name VARCHAR(100), species VARCHAR(100), type VARCHAR(100), exhibit VARCHAR(100), PRIMARY KEY (id))";
   let sql4 = "CREATE TABLE employees(id VARCHAR(100), name VARCHAR(100), type VARCHAR(100), subtype VARCHAR(100), PRIMARY KEY (id))";
   connection.query(sql3, function(err, result){
@@ -65,7 +67,7 @@ let createTables = () => {
 }
 
 // Load default values from file and put into database
-let populateTables = () => {
+function populateTables() {
   let defaultQueries = [];
 
   try {

@@ -1,4 +1,4 @@
-A personal website I'm working on using the Express framework for Node. Hosted on AWS.
+A personal website developed using the Express framework for Node. Hosted on AWS.
 
 Homepage:  
 https://laynekm.com

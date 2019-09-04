@@ -8,12 +8,26 @@ block content
     .main-header(style='min-height: 325px;')
       .index-header
         h1 Welcome / Bienvenue
+      .index-header-body
         img(src="/images/me_closeup.jpg")
-      p Hi, I'm Layne.
-      p.
-        I'm a fourth-year Carleton student enrolled in the Honour's Computer Science program, specializing in Software Engineering.
-        I'm also minoring in history because history is cool.
-      p Take a look around and be sure to check out my GitHub as well!
+        .index-header-body-content
+          p Hi, my name's Layne.
+          p.
+            I'm a fourth-year student at Carleton University, enrolled in the Software Engineering stream
+            of the Honours Computer Science program.
+            Through my education, co-op experience, and personal projects, I've come to develop a keen interest
+            in full-stack software development (with a preference towards backend).
+          p.
+            For my Honours project, I'm working with several classmates on a project called DeepRead.
+            The user-facing app itself is an experimental e-reader meant to assist dementia patients with reading comprehension.
+            I'm working on developing a web dashboard that will allow researchers to manage user data and
+            generate analytics reports.
+          p.
+            Take a look around and be sure to check out my #[a(href="https://github.com/laynekm") GitHub] as well.
+            I'm also minoring in history and love random facts, so I made an app just for that called
+            #[a(href="https://play.google.com/store/apps/details?id=laynekm.bytesizehistory") Bytesize History.]
+          p.
+            I'm currently looking for interesting career opportunities for when I graduate in May 2020!
     .main-body
       .full-card
         .card-header
@@ -21,22 +35,44 @@ block content
           | About this website...
         .card-body
           p.
-            Developed using the Express framework for Node.
-            The main section was designed using HTML, CSS, and Javascript + jQuery with some utilization of the Jade templating engine. 
-            Bootstrap is used in the DBMS section.
+            Most of this website was developed in the summer of 2018. I had just gotten back from
+            a backpacking trip to Europe and was working part-time; I figured I would use my spare time
+            to work on some side projects. After spending most of 2019 doing a co-op as a web developer,
+            it's cool to see how much I've learned since originally working on this.
+          p.
+            The backend for this website was developed using the Express framework for Node and the frontend
+            is comprised of HTML, CSS, and Javascript (along with some jQuery and Bootstrap).
+            I had a lot of fun with this, especially the arcade games!
           p Features include:
           ul
             li Renditions of classic arcade games written in Javascript/ES6
-            li A MySQL database management system with a Bootstrap front-end
-            li Interactive visualizations of various algorithms
+            li A MySQL database management system with a Bootstrap frontend
+            li Interactive visualizations of sorting algorithms
             li Querying tools via RESTful APIs
-            li Client-server communication via GET/POST requests and sockets
             li A customizable, mobile-friendly design
       .full-card
         .card-header
-          i.fas.fa-bug
-          | Known issues:
+          i.fas.fa-user
+          | About me...
         .card-body
-          ul
-            li Canvas input location does not scale with browser resize (much better now but still not perfect)            
-            li Sidenav container fixed so still appears if scroll right (though this should never actually happen)
+          p.
+            Born and raised in Toronto — well, and Stouffville, but nobody's ever heard of that town — I decided
+            to come to Ottawa for school after visiting a couple times and seeing how great of a city is
+            (yes, even after visiting in winter). I became interested in computer science while still in highschool
+            where I mostly created games, my favourite being one about a stranded cosmonaut who battles
+            waves of zombies on the moon. The code for that is unfortunately lost to the sands of time.
+          p.
+            I've always enjoyed working on both visual and logical aspects of software. During my co-ops at an insurtech
+            startup called Slice, I went from working in quality assurance to frontend development and finally
+            on to full-stack development. The work I enjoyed the most was when I would implement a feature in its entirety,
+            from backend to front. I directly contributed to the development of several on-demand insurance products on 
+            Slice's Insurance Cloud Services platform. My frontend work was centered around the React framework for Javascript
+            and my backend work was in Java using Spring/Spring Boot, along with a handful of other libraries and tools.
+            Almost every week I found myself working with some technology I had never even heard of before.
+          p.
+            I'm also interested in history, film, literature, traveling, and whatever else grabs my attention that week.
+            I'm minoring in history and have taken a ton of other classes that have interested me over the years such as cognitive science, 
+            psychology, film, religions, natural history, and French.
+            I believe it's important to branch out, especially while you're still in school. You can only stare at code for so long every day.
+          p. 
+            I'm also planning on going to Japan for my next trip so let me know if you know any cool places to visit!

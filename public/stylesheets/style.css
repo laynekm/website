@@ -4,6 +4,7 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0px;
+  line-height: 1.25;
 }
 
 hr{
@@ -165,6 +166,7 @@ ul{
   margin-top: 75px;
   margin-bottom: 15px;
   margin-left: 200px;
+  line-height: 1.25;
 }
 
 .main-header{
@@ -341,8 +343,12 @@ input[type=text]:focus{
     padding-top: 5px;
 }
 
-.index-header img{
-  float: left;
+.index-header-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.index-header-body img{
   height: 200px;
   width: 200px;
   border-radius: 50%;
@@ -452,18 +458,15 @@ input[type=text]:focus{
   .mobile-sidenav a .fab{
     padding-top: 13px;
   }
-}
-
-@media screen and (max-width: 450px){
-  .index-header img{
-    float: none;
-    margin: 0px;
-
-  }
 
   .index-header{
     display: inline-block;
     width: 100%;
     text-align: center;
+  }
+
+  .index-header-body {
+    flex-direction: column;
+    align-items: center;
   }
 }
