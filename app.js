@@ -96,15 +96,15 @@ io.on('connection', function(socket){
 });
 
 // DBMS components
-dbms.connect();
-app.post('/addAnimal', function(req, res) { dbms.addAnimal(req, res); });
-app.post('/queryAnimal', function(req, res) { dbms.queryAnimal(req, res); });
-app.get('/getAllAnimals', function(req, res) { dbms.getAllAnimals(req, res); });
-app.post('/removeAnimal', function(req, res) { dbms.removeAnimal(req, res); });
-app.post('/addEmployee', function(req, res) { dbms.addEmployee(req, res); });
-app.post('/queryEmployee', function(req, res) { dbms.queryEmployee(req, res); });
-app.get('/getAllEmployees', function(req, res) { dbms.getAllEmployees(req, res); });
-app.post('/removeEmployee', function(req, res) { dbms.removeEmployee(req, res); });
+// dbms.connect();
+// app.post('/addAnimal', function(req, res) { dbms.addAnimal(req, res); });
+// app.post('/queryAnimal', function(req, res) { dbms.queryAnimal(req, res); });
+// app.get('/getAllAnimals', function(req, res) { dbms.getAllAnimals(req, res); });
+// app.post('/removeAnimal', function(req, res) { dbms.removeAnimal(req, res); });
+// app.post('/addEmployee', function(req, res) { dbms.addEmployee(req, res); });
+// app.post('/queryEmployee', function(req, res) { dbms.queryEmployee(req, res); });
+// app.get('/getAllEmployees', function(req, res) { dbms.getAllEmployees(req, res); });
+// app.post('/removeEmployee', function(req, res) { dbms.removeEmployee(req, res); });
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
